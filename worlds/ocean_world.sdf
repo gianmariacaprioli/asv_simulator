@@ -1,0 +1,136 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <world name="ocean_world">
+  
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+
+    <plugin filename="gz-sim-navsat-system" name="gz::sim::systems::NavSat"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <gravity>0 0 -9.81</gravity>
+
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>36.509513</latitude_deg>  
+      <longitude_deg>-6.263074</longitude_deg>
+      <elevation>0.0</elevation>
+      <heading_deg>0.0</heading_deg>
+    </spherical_coordinates>
+
+    <plugin filename="gz-sim-buoyancy-system" name="gz::sim::systems::Buoyancy">
+      <graded_buoyancy>
+        <default_density>1025</default_density>
+        <density_change>
+          <above_depth>0.0</above_depth>
+          <density>1.225</density> 
+        </density_change>
+      </graded_buoyancy>
+      <enable>vessel_v2::base_link</enable>
+    </plugin>
+
+    <model name="water_plane">
+      <static>true</static>
+      <pose>0 0 0.0 0 0 0</pose>
+      <link name="link">
+        <visual name="water_visual">
+          <geometry>
+            <plane>
+              <normal>0 0 0</normal>
+              <size>2000 2000</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.0 0.3 0.6 0.4</ambient>
+            <diffuse>0.0 0.3 0.6 0.4</diffuse>
+            <specular>0.1 0.1 0.1 1.0</specular>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+    </model>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <!-- <model name="bottom_test">
+      <static>true</static>
+
+      <link name="link">
+
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1000 1000 1</size>
+            </box>
+          </geometry>
+          <pose>0 0 -10 0 0 0</pose>
+        </collision>
+
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1000 1000 1</size>
+            </box>
+          </geometry>
+          <pose>0 0 -10 0 0 0</pose>
+        </visual>
+
+      </link>
+    </model> -->
+
+    <model name="depths">
+      <static>true</static>
+      <pose>0 0 -20 0 0 0</pose> 
+      <link name="link_depths">
+        <collision name="collision_depths">
+          <pose>0 0 -20 0 0 0</pose> 
+          <geometry>
+            <mesh>
+              <uri>model://depths/meshes/depth.stl</uri>
+              <scale>1 1 1</scale> 
+            </mesh>
+          </geometry>
+        </collision>
+        
+        <visual name="visual_depths">
+          <pose>0 0 -20 0 0 0</pose> 
+          <geometry>
+            <mesh>
+              <uri>model://depths/meshes/depth.stl</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.5 0.4 0.3 1.0</ambient>
+            <diffuse>0.5 0.4 0.3 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="harbour">
+      <static>true</static>
+      <include>
+        <name>harbour_model</name>
+        <uri>model://harbour</uri>
+        <pose>0 0 2.0 0 0 0</pose>
+      </include>
+    </model>
+
+    <include>
+      <uri>model://vessel_v2</uri>
+      <pose>0 0 0.0 0.0 0 0</pose>
+    </include>
+
+  </world>
+</sdf>

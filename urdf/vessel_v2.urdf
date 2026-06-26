@@ -1,0 +1,258 @@
+<sdf version='1.9'>
+  <model name='vessel_v2'>
+    <link name='base_link'>
+      <inertial>
+        <mass>55000</mass>
+        <pose>0 0 -0.97999999999999998 0 0 0</pose>
+        <inertia>
+          <ixx>146366</ixx>
+          <iyy>805620</iyy>
+          <izz>913838</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <collision name='collision_hull'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>13.109999999999999 5.2699999999999996 2.04</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='visual_hull'>
+        <pose>-2.5 0 0.78000000000000003 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>vessel_v2/meshes/vessel_simplified.stl</uri>
+            <scale>0.055599999999999997 0.055599999999999997 0.055599999999999997</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.200000003 0.200000003 0.800000012 1</ambient>
+          <diffuse>0.200000003 0.200000003 0.800000012 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name='left_propeller'>
+      <pose>-6.5999999999999996 -1 -0.80000000000000004 0 0 0</pose>
+      <inertial>
+        <mass>5</mass>
+        <inertia>
+          <ixx>0.01</ixx>
+          <iyy>0.01</iyy>
+          <izz>0.01</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <visual name='left_prop_visual'>
+        <pose>0 0 0 0 0 3.1400000000000001</pose>
+        <geometry>
+          <mesh>
+            <uri>vessel_v2/meshes/vessel_propeller_simplified.stl</uri>
+            <scale>0.10000000000000001 0.10000000000000001 0.10000000000000001</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.200000003 0.200000003 0.800000012 1</ambient>
+          <diffuse>0.200000003 0.200000003 0.800000012 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name='right_propeller'>
+      <pose>-6.5999999999999996 1 -0.80000000000000004 0 0 0</pose>
+      <inertial>
+        <mass>5</mass>
+        <inertia>
+          <ixx>0.01</ixx>
+          <iyy>0.01</iyy>
+          <izz>0.01</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <visual name='right_prop_visual'>
+        <pose>0 0 0 0 0 3.1400000000000001</pose>
+        <geometry>
+          <mesh>
+            <uri>vessel_v2/meshes/vessel_propeller_simplified.stl</uri>
+            <scale>0.10000000000000001 0.10000000000000001 0.10000000000000001</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.200000003 0.200000003 0.800000012 1</ambient>
+          <diffuse>0.200000003 0.200000003 0.800000012 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <joint name='left_engine_joint' type='revolute'>
+      <parent>base_link</parent>
+      <child>left_propeller</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-inf</lower>
+          <upper>inf</upper>
+        </limit>
+      </axis>
+    </joint>
+    <joint name='right_engine_joint' type='revolute'>
+      <parent>base_link</parent>
+      <child>right_propeller</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-inf</lower>
+          <upper>inf</upper>
+        </limit>
+      </axis>
+    </joint>
+    <link name='gps_link'>
+      <pose>-3 0 2.5 0 0 0</pose>
+      <inertial>
+        <mass>0.10000000000000001</mass>
+        <inertia>
+          <ixx>0.0001</ixx>
+          <iyy>0.0001</iyy>
+          <izz>0.0001</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <sensor name='gps_sensor' type='navsat'>
+        <always_on>true</always_on>
+        <update_rate>10</update_rate>
+        <topic>/vessel_v2/gps/fix</topic>
+        <gps/>
+      </sensor>
+    </link>
+    <joint name='gps_joint' type='fixed'>
+      <parent>base_link</parent>
+      <child>gps_link</child>
+    </joint>
+    <link name='sensors_link'>
+      <pose>6 0 1.8 0 0 0</pose>
+      <inertial>
+        <mass>0.5</mass>
+        <inertia>
+          <ixx>0.001</ixx>
+          <iyy>0.001</iyy>
+          <izz>0.001</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <sensor name='camera' type='camera'>
+        <pose>0 0 0.20000000000000001 0 0 0</pose>
+        <always_on>true</always_on>
+        <update_rate>30</update_rate>
+        <topic>/vessel_v2/camera</topic>
+        <camera>
+          <horizontal_fov>1.3959999999999999</horizontal_fov>
+          <image>
+            <width>800</width>
+            <height>600</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.10000000000000001</near>
+            <far>150</far>
+          </clip>
+        </camera>
+      </sensor>
+      <sensor name='gpu_lidar' type='gpu_lidar'>
+        <pose>0 0 0.5 0 0 0</pose>
+        <always_on>true</always_on>
+        <update_rate>10</update_rate>
+        <topic>/vessel_v2/lidar</topic>
+        <lidar>
+          <scan>
+            <horizontal>
+              <samples>640</samples>
+              <resolution>1</resolution>
+              <min_angle>-3.1415899999999999</min_angle>
+              <max_angle>3.1415899999999999</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>16</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.26100000000000001</min_angle>
+              <max_angle>0.26100000000000001</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.5</min>
+            <max>100</max>
+            <resolution>0.01</resolution>
+          </range>
+        </lidar>
+      </sensor>
+      <sensor name='sonar' type='gpu_lidar'>
+        <pose>0 0 -0.5 0 0.34900000000000003 0</pose>
+        <always_on>true</always_on>
+        <update_rate>5</update_rate>
+        <topic>/vessel_v2/sonar</topic>
+        <lidar>
+          <scan>
+            <horizontal>
+              <samples>32</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.26100000000000001</min_angle>
+              <max_angle>0.26100000000000001</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.5</min>
+            <max>50</max>
+            <resolution>0.10000000000000001</resolution>
+          </range>
+        </lidar>
+      </sensor>
+    </link>
+    <joint name='sensors_joint' type='fixed'>
+      <parent>base_link</parent>
+      <child>sensors_link</child>
+    </joint>
+    <plugin name='gz::sim::systems::Hydrodynamics' filename='gz-sim-hydrodynamics-system'>
+      <link_name>base_link</link_name>
+      <xU>-2750.0</xU>
+      <xUabsU>-300.0</xUabsU>
+      <yV>-5500.0</yV>
+      <yVabsV>-4028.0</yVabsV>
+      <zW>-5500.0</zW>
+      <zWabsW>-15000.0</zWabsW>
+      <kP>-14636.0</kP>
+      <kPabsP>-100000.0</kPabsP>
+      <mQ>-80562.0</mQ>
+      <mQabsQ>-200000.0</mQabsQ>
+      <nR>-60922.0</nR>
+      <nRabsR>-283000.0</nRabsR>
+    </plugin>
+    <plugin name='gz::sim::systems::PosePublisher' filename='gz-sim-pose-publisher-system'>
+      <publish_link_pose>true</publish_link_pose>
+      <use_pose_vector_msg>true</use_pose_vector_msg>
+      <publish_nested_model_pose>true</publish_nested_model_pose>
+      <update_frequency>50</update_frequency>
+    </plugin>
+    <plugin name='gz::sim::systems::Thruster' filename='gz-sim-thruster-system'>
+      <namespace>vessel_v2</namespace>
+      <joint_name>left_engine_joint</joint_name>
+      <thrust_coefficient>0.2</thrust_coefficient>
+      <fluid_density>1025.0</fluid_density>
+      <propeller_diameter>1.2</propeller_diameter>
+    </plugin>
+    <plugin name='gz::sim::systems::Thruster' filename='gz-sim-thruster-system'>
+      <namespace>vessel_v2</namespace>
+      <joint_name>right_engine_joint</joint_name>
+      <thrust_coefficient>0.2</thrust_coefficient>
+      <fluid_density>1025.0</fluid_density>
+      <propeller_diameter>1.2</propeller_diameter>
+    </plugin>
+  </model>
+</sdf>
