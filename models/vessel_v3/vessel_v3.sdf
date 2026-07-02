@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version="1.9">
-  <model name="vessel_v2">
+  <model name="vessel_v3">
     <link name="base_link">
       <inertial>
         <mass>55000.0</mass>
@@ -20,24 +20,12 @@
         </geometry>
       </collision>
 
-      <!-- <visual name="visual_box">
-        <pose>0 0 0.0 0 0 0</pose>
-        <geometry>
-          <box><size>13.11 5.27 2.04</size></box>
-        </geometry>
-        <material>
-        <ambient>0.1 0.1 0.1 0.5</ambient>
-        <diffuse>0.1 0.1 0.1 0.5</diffuse>
-        </material>
-      </visual> -->
-
       <visual name="visual_hull">
         <pose>-2.5 0 0.78 0 0 0</pose>
         <geometry>
           <mesh>
-          <uri>vessel_v2/meshes/vessel_simplified.stl</uri>          
+          <uri>model://vessel_v3/meshes/vessel_simplified.stl</uri>          
           <scale>0.0556 0.0556 0.0556</scale>
-          <!-- <scale>0.0556 0.08 0.026</scale>  -->
           </mesh>
         </geometry>
         <material>
@@ -61,7 +49,7 @@
         <pose>0.0 0.0 0.0 0 0 3.14</pose> 
         <geometry>
           <mesh>
-            <uri>vessel_v2/meshes/vessel_propeller_simplified.stl</uri>          
+            <uri>model://vessel_v3/meshes/vessel_propeller_simplified.stl</uri>          
             <scale>0.1 0.1 0.1</scale>
           </mesh>
         </geometry>
@@ -86,7 +74,7 @@
         <pose>0.0 0.0 0.0 0 0.0 3.14</pose> 
         <geometry>
           <mesh>
-            <uri>vessel_v2/meshes/vessel_propeller_simplified.stl</uri>          
+            <uri>model://vessel_v3/meshes/vessel_propeller_simplified.stl</uri>          
             <scale>0.1 0.1 0.1</scale>
           </mesh>
         </geometry>
@@ -151,7 +139,7 @@
       
       <sensor name="gps_sensor" type="navsat">
         <always_on>1</always_on>
-        <update_rate>10</update_rate> <topic>/vessel_v2/gps/fix</topic>
+        <update_rate>10</update_rate> <topic>/vessel_v3/gps/fix</topic>
       </sensor>
     </link>
 
@@ -173,7 +161,7 @@
       <sensor name="camera" type="camera">
         <pose>0 0 0.2 0 0 0</pose> <always_on>1</always_on>
         <update_rate>30</update_rate>
-        <topic>/vessel_v2/camera</topic>
+        <topic>/vessel_v3/camera</topic>
         <camera>
           <horizontal_fov>1.396</horizontal_fov> <image>
             <width>800</width>
@@ -192,7 +180,7 @@
         <always_on>1</always_on>
         <visualize>true</visualize>
         <update_rate>10</update_rate>
-        <topic>/vessel_v2/lidar</topic>
+        <topic>/vessel_v3/lidar</topic>
         <lidar>
           <scan>
             <horizontal>
@@ -229,7 +217,7 @@
         <always_on>1</always_on>
         <visualize>true</visualize> 
         <update_rate>5</update_rate>    
-        <topic>/vessel_v2/sonar</topic>
+        <topic>/vessel_v3/sonar</topic>
         <lidar>
           <scan>
             <horizontal>
@@ -264,38 +252,37 @@
     </joint>
       
     <plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
-      <!-- forza su su x.y.z -->
       <link_name>base_link</link_name>
-      <!-- SURGE (X) -->
-      <!-- <xU>0.0</xU>
-      <xUabsU>300.0</xUabsU>  reale
-      Inserendo -1850.0, fai in modo che alla velocità limite di circa 5 m/s, la resistenza quadratica generi una forza frenante (1850⋅5^2 ≈46.250 N) che, sommata allo smorzamento lineare, bilancia esattamente i 60.000 N (60 kN) di spinta massima delle tue due eliche.-->
       <xU>-2750.0</xU>
       <xUabsU>-1500.0</xUabsU>
-      <!-- SWAY (Y) -->
-      <!-- <yV>0.0</yV>
-      <yVabsV>0.0</yVabsV> -->
       <yV>-5500.0</yV>
       <yVabsV>-4028.0</yVabsV>
-      <!-- HEAVE (Z) -->
-      <!-- <zW>0.0</zW>
-      <zWabsW>0.0</zWabsW> -->
       <zW>-5500.0</zW>
       <zWabsW>-15000.0</zWabsW>
-      <!-- momento frenante su x.y.z, linear dumping: basse velocità-->
-      <!-- ROLL (X) -->
       <kP>-14636.0</kP>
       <kPabsP>-100000.0</kPabsP>
-
-      <!-- PITCH (Y) -->
       <mQ>-80562.0</mQ>
       <mQabsQ>-200000.0</mQabsQ>
-
-      <!-- YAW (Z) -->
       <nR>-60922.0</nR>
       <nRabsR>-283000.0</nRabsR>
-      <!-- smorzamento quadratico, damping-drag: alte vleocità -->
-      <!-- <xUU>, <yVV>, <zWW>, <kPP>, <mQQ>, <nRR> -->
+    </plugin>
+
+    <plugin
+      filename="libASVSurface.so"
+      name="asv::Surface">
+      <link_name>base_link</link_name>
+      <hull_length>13.11</hull_length>
+      <hull_radius>1.02</hull_radius>
+      <fluid_density>1025</fluid_density>
+      <points>
+        <point>6.0 2.0 0</point>
+        <point>6.0 -2.0 0</point>
+        <point>-6.0 2.0 0</point>
+        <point>-6.0 -2.0 0</point>
+      </points>
+      <wavefield>
+        <topic>/wavefield/parameters</topic>
+      </wavefield>
     </plugin>
 
     <plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher">
@@ -306,7 +293,7 @@
     </plugin>
 
     <plugin filename="gz-sim-thruster-system" name="gz::sim::systems::Thruster">
-      <namespace>vessel_v2</namespace>
+      <namespace>vessel_v3</namespace>
       <joint_name>left_engine_joint</joint_name>
       <max_thrust_cmd>30000.0</max_thrust_cmd>
       <min_thrust_cmd>-20000.0</min_thrust_cmd>
@@ -317,7 +304,7 @@
     </plugin>
 
     <plugin filename="gz-sim-thruster-system" name="gz::sim::systems::Thruster">
-      <namespace>vessel_v2</namespace>
+      <namespace>vessel_v3</namespace>
       <joint_name>right_engine_joint</joint_name>
       <max_thrust_cmd>30000.0</max_thrust_cmd>
       <min_thrust_cmd>-20000.0</min_thrust_cmd>

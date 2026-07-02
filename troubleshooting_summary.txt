@@ -1,0 +1,113 @@
+Riepilogo delle correzioni per la compilazione del workspace ROS2
+
+Questo file riassume i passaggi di troubleshooting eseguiti per compilare con successo i pacchetti `asv_simulator` e `vrx_gz`.
+
+---
+
+### Problema 1: Errori di compilazione in `asv_simulator`
+
+*   **File interessato**: `/root/ros2_ws/src/asv_simulator/plugins/Wavefield.hh`
+*   **Errori**:
+    1.  Errori di battitura nei commenti Doxygen (es. `\eturn` invece di `\return`).
+    2.  Dichiarazioni di funzione mancanti per `Topic()`, `Active()`, `Parameters()`, `ComputeDepthSimply()` e `ComputeDepthDirectly()`.
+*   **Soluzione**:
+    1.  Corretti tutti i refusi `\eturn` in `\return`.
+    2.  Aggiunte le dichiarazioni di funzione mancanti nella definizione della classe `Wavefield`.
+
+---
+
+### Problema 2: Errore di compilazione in `vrx_gz` (mancanza file sorgente)
+
+*   **File interessato**: `/root/ros2_ws/src/vrx/vrx_gz/CMakeLists.txt`
+*   **Errore**: `Cannot find source file: src/Surface.cc`. Il percorso del file sorgente per la libreria `Surface` era errato.
+*   **Soluzione**: Corretto il percorso del file sorgente da `src/Surface.cc` a `src/plugins/Surface.cc`.
+    *(Nota: Questo errore è stato risolto in un tentativo precedente, permettendo al compilatore di procedere e rilevare il problema successivo.)*
+
+---
+
+### Problema 3: Errore di compilazione in `vrx_gz` (namespace mismatch)
+
+*   **File interessato**: `/root/ros2_ws/src/vrx/vrx_gz/src/Surface.cc`
+*   **Errore**: `‘Wavefield’ does not name a type` e `‘class asv::Surface::Implementation’ has no member named ‘wavefield’`. Questo indica un errore di namespace, dove il file di implementazione `Surface.cc` nel pacchetto `vrx_gz` stava tentando di definire una classe `asv::Surface::Implementation` invece di `vrx::Surface::Implementation`.
+*   **Soluzione**: Corretto il namespace della classe `Implementation` da `asv::Surface::Implementation` a `vrx::Surface::Implementation` nel file `Surface.cc`.
+
+---
+
+### Problema 4: Utilizzo del Plugin `Surface` in `asv_simulator`
+
+*   **Obiettivo**: Integrare e utilizzare il plugin `asv::Surface` compilato all'interno del pacchetto `asv_simulator`.
+*   **Soluzione**:
+    1.  **Compilazione e Installazione**: Il `CMakeLists.txt` era già configurato correttamente per compilare il plugin come libreria condivisa (`libSurface.so`) e installarlo nella cartella `lib`.
+    2.  **Meccanismo di Caricamento**: Sfruttare il sistema di build di ROS 2 (`colcon`) che, dopo aver sorgentato `install/setup.bash`, imposta la variabile d'ambiente `GZ_SIM_SYSTEM_PLUGIN_PATH`. Questo permette a Gazebo di trovare automaticamente la libreria del plugin.
+    3.  **Integrazione SDF**: Aggiungere il plugin al file SDF del modello del vascello (es. `asv_simulator/models/nome_vascello/model.sdf`) all'interno del tag `<model>`.
+        ```xml
+        <plugin filename="libSurface.so" name="asv::Surface">
+          <link_name>base_link</link_name>
+          <!-- ... altri parametri come hull_radius, points, etc. ... -->
+        </plugin>
+        ```
+    4.  **Verifica**: Avviare la simulazione per verificare che il plugin venga caricato e che il vascello galleggi correttamente.
+
+---
+
+### Problema 6: Semplificazione della fisica del modello `vessel_v3`
+
+*   **Obiettivo**: Assicurarsi che il plugin `asv::Surface` sia l'unico responsabile per la fisica dell'acqua definita nel modello `vessel_v3`, per evitare potenziali conflitti o comportamenti inattesi.
+*   **Soluzione**:
+    1.  **Rimozione Plugin Idrodinamico**: Rimosso il plugin `gz-sim-hydrodynamics-system` dal file `vessel_v3.sdf`. In questo modo, il plugin `libSurface.so` è l'unico a gestire l'interazione con l'acqua a livello di modello.
+        *(Nota: Il plugin rimosso forniva la resistenza idrodinamica (drag). Senza di esso, il vascello non avrà resistenza all'avanzamento in acqua.)*
+    2.  **Correzione Configurazione**: Aggiornato il file `/root/ros2_ws/src/asv_simulator/models/vessel_v3/model.config` per correggere il nome del modello da `vessel_v1` a `vessel_v3`, per coerenza.
+
+---
+
+### Problema 7: Implementazione finale del plugin `Surface` con onde e idrodinamica
+
+*   **Obiettivo**: Configurare `vessel_v3` per usare il plugin `asv::Surface` per galleggiamento e onde, mantenendo `gz-sim-hydrodynamics-system` per la resistenza dell'acqua (drag).
+*   **Soluzione**:
+    1.  **Modifica del Mondo (`ocean_world.sdf`)**:
+        *   Aggiunto un plugin (`libWaveVisual.so` da `vrx_gz`) per generare le onde e pubblicare i loro parametri sul topic `/wavefield/parameters`.
+        *   Rimosso il tag `<enable>` dal plugin `gz-sim-buoyancy-system` per evitare conflitti, lasciando che il galleggiamento di `vessel_v3` sia gestito esclusivamente dal plugin `Surface`.
+    2.  **Modifica del Vascello (`vessel_v3.sdf`)**:
+        *   Ripristinato il plugin `gz-sim-hydrodynamics-system` per simulare la resistenza dell'acqua.
+        *   Confermato che il plugin `asv::Surface` è configurato per iscriversi al topic `/wavefield/parameters`, completando l'interazione con le onde.
+    3.  **Architettura Finale**: La fisica del vascello è ora gestita da due plugin specializzati: `asv::Surface` per galleggiamento e onde, e `gz-sim-hydrodynamics-system` per il drag.
+
+---
+
+### Problema 8: Rendere `asv_simulator` autonomo e standardizzare la struttura
+
+*   **Obiettivo**: Internalizzare il plugin `WaveVisual` per eliminare la dipendenza da `vrx_gz` e organizzare correttamente i file sorgente del pacchetto.
+*   **Problema**:
+    1.  Il mondo `ocean_world_waves.sdf` dipendeva dal plugin `vrx::WaveVisual` per la generazione dei parametri delle onde.
+    2.  La struttura dei file del pacchetto era inconsistente: alcuni plugin (`WaveVisual`) seguivano la struttura standard (header in `include/`, sorgente in `plugins/`), mentre altri (`Surface`, `PolyhedraBuoyancyDrag`, etc.) avevano sia header che sorgenti nella cartella `plugins/`. Questo creava confusione e percorsi di inclusione non uniformi.
+*   **Soluzione**:
+    1.  **Creazione Plugin Locale**: È stato creato un nuovo plugin `asv::WaveVisual` all'interno del pacchetto `asv_simulator`. Questo plugin è una versione semplificata che legge i parametri `<wavefield>` dal file SDF e li pubblica sul topic `/wavefield/parameters`.
+    2.  **Aggiornamento Build System**: Il file `CMakeLists.txt` è stato aggiornato per compilare il nuovo plugin `WaveVisual` come libreria `libWaveVisual.so` e installarlo nella directory `lib/asv_simulator`. Anche le dipendenze in `package.xml` sono state aggiornate.
+    3.  **Aggiornamento Mondo**: Il file `ocean_world_waves.sdf` è stato modificato per usare il nuovo plugin locale (`<plugin ... name="asv::WaveVisual">`) invece di quello di `vrx`.
+    4.  **Standardizzazione Struttura File**: Per risolvere le inconsistenze e seguire le best practice di ROS 2, è stata eseguita una pulizia completa:
+        *   **Header Spostati**: Tutti i file di intestazione (`.hh`) sono stati spostati o consolidati nella directory `include/asv_simulator/`. Questo centralizza le interfacce pubbliche del pacchetto.
+        *   **Sorgenti in `plugins/`**: La cartella `plugins/` è stata mantenuta per contenere tutti i file di implementazione (`.cc`), agendo come una cartella `src` specializzata.
+        *   **Include Uniformi**: Tutti i file sorgente (`.cc`) sono stati modificati per usare percorsi di inclusione relativi alla cartella `include` (es. `#include "asv_simulator/NomeFile.hh"`), rendendo il codice più chiaro e robusto.
+        *   **CMake Aggiornato**: Il `CMakeLists.txt` è stato completato per compilare e linkare correttamente tutte le librerie dei plugin (`Surface`, `Waves`, `WaveVisual`, `PolyhedraBuoyancyDrag`) con le loro dipendenze e i percorsi di inclusione corretti.
+
+---
+
+### Problema 9: Errore di `find_package` per le librerie Gazebo
+
+*   **Obiettivo**: Risolvere un errore di compilazione che impedisce a CMake di trovare i pacchetti di Gazebo.
+*   **Errore**: `Could not find a package configuration file provided by "gz-msgs9"`.
+*   **Causa**: Il file `CMakeLists.txt` richiedeva `gz-sim8` (Gazebo Ionic), ma le dipendenze per i messaggi (`gz-msgs`) e i trasporti (`gz-transport`) erano impostate a versioni precedenti (`9` e `12` rispettivamente).
+*   **Soluzione**:
+    1.  **Correzione Versioni**: Aggiornato il `CMakeLists.txt` per richiedere le versioni corrette delle librerie per Gazebo Ionic: `gz-msgs10` e `gz-transport13`.
+    2.  **Allineamento Dipendenze**: Aggiornato anche il file `package.xml` per riflettere le nuove dipendenze corrette (`gz-msgs10` e `gz-transport13`).
+
+---
+
+### Problema 5: Integrazione del plugin `Surface` nel modello del vascello
+
+*   **Obiettivo**: Applicare il plugin `asv::Surface` al modello del vascello `vessel_v3`.
+*   **Soluzione**:
+    1.  **Creazione del Modello**: Creato il file `/root/ros2_ws/src/asv_simulator/models/vessel_v3/vessel_v3.sdf` basandosi su `vessel_v2.sdf`, mantenendo inalterate le definizioni di inerzia e sensori come richiesto.
+    2.  **Aggiunta Plugin**: Inserito il blocco `<plugin>` per `libSurface.so` all'interno del file `vessel_v3.sdf`.
+    3.  **Configurazione Plugin**: Impostati i parametri del plugin (`hull_length`, `hull_radius`, `points`, etc.) in base alle dimensioni del vascello definite nel file SDF.
+    4.  **Aggiornamento Nomi**: Modificati i riferimenti interni (nome del modello, URI delle mesh, topic dei sensori) da `vessel_v2` a `vessel_v3` per coerenza.

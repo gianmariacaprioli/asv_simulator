@@ -21,17 +21,6 @@
       <heading_deg>0.0</heading_deg>
     </spherical_coordinates>
 
-    <plugin filename="gz-sim-buoyancy-system" name="gz::sim::systems::Buoyancy">
-      <graded_buoyancy>
-        <default_density>1025</default_density>
-        <density_change>
-          <above_depth>0.0</above_depth>
-          <density>1.225</density> 
-        </density_change>
-      </graded_buoyancy>
-      <enable>vessel_v2::base_link</enable>
-    </plugin>
-
     <model name="water_plane">
       <static>true</static>
       <pose>0 0 0.0 0 0 0</pose>
@@ -127,9 +116,28 @@
     </model>
 
     <include>
-      <uri>model://vessel_v2</uri>
+      <uri>model://vessel_v3</uri>
       <pose>0 0 0.0 0.0 0 0</pose>
     </include>
 
+    <plugin filename="libASVWaveVisual.so" name="asv::WaveVisual">
+      <wavefield>
+        <topic>/wavefield/parameters</topic>
+        <size>1000 1000</size>
+        <cell_count>50 50</cell_count>
+        <wave>
+          <model>PMS</model>
+          <period>5</period>
+          <number>3</number>
+          <scale>1.5</scale>
+          <gain>0.1</gain>
+          <direction>1 0</direction>
+          <angle>0.4</angle>
+          <tau>2.0</tau>
+          <amplitude>0.0</amplitude>
+          <steepness>0.0</steepness>
+        </wave>
+      </wavefield>
+    </plugin>
   </world>
 </sdf>

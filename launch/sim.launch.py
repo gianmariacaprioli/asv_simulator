@@ -3,13 +3,16 @@ from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, AppendEnvironmentVariable
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
-from ament_index_python.packages import get_package_share_directory
+from ament_index_python.packages import get_package_prefix, get_package_share_directory
 
 def generate_launch_description():
+    vessel_names =['vessel_v2', 'vessel_v3']
+    world_names = ['ocean_world.sdf', 'ocean_world_waves.sdf']
     pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim')
     pkg_asv_sim = get_package_share_directory('asv_simulator')
+    prefix_asv_sim = get_package_prefix('asv_simulator')
     
-    world_file = os.path.join(pkg_asv_sim, 'worlds', 'ocean_world.sdf')
+    world_file = os.path.join(pkg_asv_sim, 'worlds', f'{world_names[1]}')
     # urdf_path = os.path.join(pkg_asv_sim, 'urdf', 'vessel_v2.urdf')
     rviz_config = os.path.join(pkg_asv_sim, 'configs', 'vessel_viz.rviz')
 
@@ -19,6 +22,11 @@ def generate_launch_description():
     set_model_path = AppendEnvironmentVariable(
         'GZ_SIM_RESOURCE_PATH',
         os.path.join(pkg_asv_sim, 'models')
+    )
+
+    set_plugin_path = AppendEnvironmentVariable(
+        'GZ_SIM_SYSTEM_PLUGIN_PATH',
+        os.path.join(prefix_asv_sim, 'lib')
     )
     
     # Nodo 1: Avvia Gazebo Harmonic
@@ -37,22 +45,22 @@ def generate_launch_description():
             '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
             
             # IL TRUCCO PER LE TF DINAMICHE: Convertiamo le pose di Gazebo in TF per RViz
-            '/model/vessel_v2/pose@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
+            f'/model/{vessel_names[1]}/pose@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
             
-            '/model/vessel_v2/joint/left_engine_joint/cmd_thrust@std_msgs/msg/Float64]gz.msgs.Double',
-            '/model/vessel_v2/joint/right_engine_joint/cmd_thrust@std_msgs/msg/Float64]gz.msgs.Double',
+            f'/model/{vessel_names[1]}/joint/left_engine_joint/cmd_thrust@std_msgs/msg/Float64]gz.msgs.Double',
+            f'/model/{vessel_names[1]}/joint/right_engine_joint/cmd_thrust@std_msgs/msg/Float64]gz.msgs.Double',
 
-            '/vessel_v2/camera@sensor_msgs/msg/Image[gz.msgs.Image',
-            '/vessel_v2/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
+            f'/{vessel_names[1]}/camera@sensor_msgs/msg/Image[gz.msgs.Image',
+            f'/{vessel_names[1]}/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
 
-            '/vessel_v2/lidar/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
-            '/vessel_v2/sonar/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
+            f'/{vessel_names[1]}/lidar/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
+            f'/{vessel_names[1]}/sonar/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
 
-            '/vessel_v2/gps/fix@sensor_msgs/msg/NavSatFix[gz.msgs.NavSat'
+            f'/{vessel_names[1]}v3/gps/fix@sensor_msgs/msg/NavSatFix[gz.msgs.NavSat'
         ],
         # Mappiamo il topic di Gazebo sul topic standard /tf di ROS 2
         remappings=[
-            ('/model/vessel_v2/pose', '/tf')
+            (f'/model/{vessel_names[1]}/pose', '/tf')
         ],
         output='screen'
     )
@@ -73,14 +81,14 @@ def generate_launch_description():
         package='tf2_ros',
         executable='static_transform_publisher',
         name='tf_camera',
-        arguments=['6.0', '0.0', '2.0', '0.0', '0.0', '0.0', 'vessel_v2', 'vessel_v2/sensors_link/camera']
+        arguments=['6.0', '0.0', '2.0', '0.0', '0.0', '0.0', f'{vessel_names[1]}', f'{vessel_names[1]}/sensors_link/camera']
     )
 
     tf_sensors = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
         name='tf_sensors',
-        arguments=['6.0', '0.0', '1.8', '0.0', '0.0', '0.0', 'vessel_v2', 'vessel_v2/sensors_link/gpu_lidar']
+        arguments=['6.0', '0.0', '1.8', '0.0', '0.0', '0.0', f'{vessel_names[1]}', f'{vessel_names[1]}/sensors_link/gpu_lidar']
     )
 
     # Nodo 4: TF Statica per il Sonar (inclinato in basso)
@@ -88,7 +96,7 @@ def generate_launch_description():
         package='tf2_ros',
         executable='static_transform_publisher',
         name='tf_sonar',
-        arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'vessel_v2/sonar_link', 'vessel_v2/sonar_link/sonar']
+        arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', f'{vessel_names[1]}/sonar_link', f'{vessel_names[1]}/sonar_link/sonar']
     )
 
     # Nodo 5: TF Statica per il GPS
@@ -96,7 +104,7 @@ def generate_launch_description():
         package='tf2_ros',
         executable='static_transform_publisher',
         name='tf_gps',
-        arguments=['-3.0', '0.0', '2.5', '0.0', '0.0', '0.0', 'vessel_v2', 'vessel_v2/gps_link/gps_sensor']
+        arguments=['-3.0', '0.0', '2.5', '0.0', '0.0', '0.0', f'{vessel_names[1]}', f'{vessel_names[1]}/gps_link/gps_sensor']
     )
 
     # Nodo RViz2
@@ -110,6 +118,7 @@ def generate_launch_description():
     
     return LaunchDescription([
         set_model_path,
+        set_plugin_path,
         gz_sim,
         bridge,
         # robot_state_publisher,
