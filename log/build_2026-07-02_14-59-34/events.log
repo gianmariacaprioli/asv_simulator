@@ -1,0 +1,597 @@
+[0.000000] (-) TimerEvent: {}
+[0.000252] (asv_simulator) JobQueued: {'identifier': 'asv_simulator', 'dependencies': OrderedDict()}
+[0.000297] (asv_simulator) JobStarted: {'identifier': 'asv_simulator'}
+[0.016843] (asv_simulator) JobProgress: {'identifier': 'asv_simulator', 'progress': 'cmake'}
+[0.017701] (asv_simulator) Command: {'cmd': ['/usr/bin/cmake', '/root/ros2_ws/src/asv_simulator', '-DAMENT_CMAKE_SYMLINK_INSTALL=1', '-DCMAKE_INSTALL_PREFIX=/root/ros2_ws/src/asv_simulator/install/asv_simulator'], 'cwd': '/root/ros2_ws/src/asv_simulator/build/asv_simulator', 'env': OrderedDict([('GZ_SIM_SYSTEM_PLUGIN_PATH', '/root/ros2_ws/install/vrx_gz/lib'), ('GZ_SIM_RESOURCE_PATH', '/root/ros2_ws/install/vrx_gz/share/vrx_gz/models/tmp:/root/ros2_ws/install/vrx_gz/share/vrx_gz/models:/root/ros2_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2:/root/ros2_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice:/root/ros2_ws/install/vrx_gz/share/vrx_gz/worlds:/root/ros2_ws/install/wamv_description/share/wamv_description/models:/root/ros2_ws/install/vrx_gazebo/share/vrx_gazebo/models:/root/ros2_ws/install/vrx_gazebo/share/::/root/ros2_ws/src/harmonic_demo:/root/ros2_ws/src/harmonic_demo/harmonic_demo:/root/ros2_ws/src/harmonic_demo:/root/ros2_ws/src/harmonic_demo/harmonic_demo'), ('HOSTNAME', 'jimlab'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/root/ros2_ws/src/asv_simulator/install/asv_simulator/lib:/root/ros2_ws/install/asv_simulator/lib:/root/ros2_ws/install/vrx_gz/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/root'), ('OLDPWD', '/root/ros2_ws'), ('ROS_PYTHON_VERSION', '3'), ('COLCON_PREFIX_PATH', '/root/ros2_ws/src/asv_simulator/install:/root/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('QT_X11_NO_MITSHM', '1'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'C.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/root/ros2_ws/src/asv_simulator/install/asv_simulator:/root/ros2_ws/install/vrx_gz:/root/ros2_ws/install/wamv_gazebo:/root/ros2_ws/install/wamv_description:/root/ros2_ws/install/vrx_ros:/root/ros2_ws/install/vrx_gazebo:/root/ros2_ws/install/map2gazebo:/root/ros2_ws/install/asv_simulator:/opt/ros/humble'), ('PWD', '/root/ros2_ws/src/asv_simulator/build/asv_simulator'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/root/ros2_ws/install/vrx_gz/local/lib/python3.10/dist-packages:/root/ros2_ws/install/vrx_gazebo/local/lib/python3.10/dist-packages:/root/ros2_ws/build/map2gazebo:/root/ros2_ws/install/map2gazebo/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/root/ros2_ws/src/asv_simulator/install/asv_simulator:/root/ros2_ws/install/vrx_gz:/root/ros2_ws/install/wamv_gazebo:/root/ros2_ws/install/wamv_description:/root/ros2_ws/install/vrx_ros:/root/ros2_ws/install/vrx_gazebo:/root/ros2_ws/install/asv_simulator:/root/ros2_ws/install/map2gazebo:/opt/ros/humble')]), 'shell': False}
+[0.099581] (-) TimerEvent: {}
+[0.154420] (asv_simulator) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.199702] (-) TimerEvent: {}
+[0.257033] (asv_simulator) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.279022] (asv_simulator) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.299812] (-) TimerEvent: {}
+[0.400175] (-) TimerEvent: {}
+[0.401672] (asv_simulator) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.409648] (asv_simulator) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.410627] (asv_simulator) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.412302] (asv_simulator) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.421845] (asv_simulator) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.500384] (-) TimerEvent: {}
+[0.600911] (-) TimerEvent: {}
+[0.614592] (asv_simulator) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[0.627412] (asv_simulator) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[0.628213] (asv_simulator) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[0.629039] (asv_simulator) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[0.653955] (asv_simulator) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.701069] (-) TimerEvent: {}
+[0.801752] (-) TimerEvent: {}
+[0.902130] (-) TimerEvent: {}
+[0.947710] (asv_simulator) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[1.002382] (-) TimerEvent: {}
+[1.102787] (-) TimerEvent: {}
+[1.105703] (asv_simulator) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[1.186349] (asv_simulator) StdoutLine: {'line': b'-- Found rclcpp: 16.0.19 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[1.202889] (-) TimerEvent: {}
+[1.274317] (asv_simulator) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[1.284609] (asv_simulator) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[1.303148] (-) TimerEvent: {}
+[1.309899] (asv_simulator) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[1.343017] (asv_simulator) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[1.389380] (asv_simulator) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[1.403378] (-) TimerEvent: {}
+[1.503869] (asv_simulator) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[1.504085] (-) TimerEvent: {}
+[1.512660] (asv_simulator) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.10 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[1.604292] (-) TimerEvent: {}
+[1.699889] (asv_simulator) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  \n'}
+[1.704516] (-) TimerEvent: {}
+[1.734078] (asv_simulator) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/humble/include  \n'}
+[1.804689] (-) TimerEvent: {}
+[1.812214] (asv_simulator) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[1.834406] (asv_simulator) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[1.905042] (-) TimerEvent: {}
+[1.986941] (asv_simulator) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[1.987478] (asv_simulator) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[2.005081] (-) TimerEvent: {}
+[2.105497] (-) TimerEvent: {}
+[2.123627] (asv_simulator) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[2.125425] (asv_simulator) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[2.205776] (-) TimerEvent: {}
+[2.223625] (asv_simulator) StdoutLine: {'line': b'-- Found rclpy: 3.3.21 (/opt/ros/humble/share/rclpy/cmake)\n'}
+[2.227940] (asv_simulator) StdoutLine: {'line': b'-- Found ros_gz_sim: 0.244.12 (/opt/ros/humble/share/ros_gz_sim/cmake)\n'}
+[2.233050] (asv_simulator) StdoutLine: {'line': b'-- Found ros_gz_bridge: 0.244.12 (/opt/ros/humble/share/ros_gz_bridge/cmake)\n'}
+[2.305870] (-) TimerEvent: {}
+[2.406268] (-) TimerEvent: {}
+[2.506724] (-) TimerEvent: {}
+[2.509735] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sim8 -- found version 8.12.0\n'}
+[2.520795] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-sim8\n'}
+[2.523305] (asv_simulator) StdoutLine: {'line': b'-- Looking for sdformat14 -- found version 14.9.0\n'}
+[2.523591] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of sdformat14\n'}
+[2.537074] (asv_simulator) StdoutLine: {'line': b"-- Checking for module 'tinyxml2'\n"}
+[2.570897] (asv_simulator) StdoutLine: {'line': b'--   Found tinyxml2, version 9.0.0\n'}
+[2.606824] (-) TimerEvent: {}
+[2.630090] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.6.0\n'}
+[2.630724] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-math7\n'}
+[2.634446] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[2.634729] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-utils2\n'}
+[2.636331] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[2.636612] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-utils2\n'}
+[2.636729] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-utils2> component [cli]\n'}
+[2.641870] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-utils2-cli -- found version 2.2.1\n'}
+[2.642336] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-utils2-cli\n'}
+[2.649385] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-plugin2 -- found version 2.0.4\n'}
+[2.650218] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-plugin2\n'}
+[2.650506] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[2.652307] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-plugin2> component [loader]\n'}
+[2.661385] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-plugin2-loader -- found version 2.0.4\n'}
+[2.662444] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-plugin2-loader\n'}
+[2.664288] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-plugin2> component [register]\n'}
+[2.670878] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-plugin2-register -- found version 2.0.4\n'}
+[2.671593] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-plugin2-register\n'}
+[2.679804] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-transport13 -- found version 13.5.0\n'}
+[2.680417] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-transport13\n'}
+[2.707065] (-) TimerEvent: {}
+[2.712660] (asv_simulator) StdoutLine: {'line': b'-- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found version "3.12.4") \n'}
+[2.731235] (asv_simulator) StdoutLine: {'line': b'-- Config-file not installed for ZeroMQ -- checking for pkg-config\n'}
+[2.738479] (asv_simulator) StdoutLine: {'line': b"-- Checking for module 'libzmq >= 4'\n"}
+[2.770585] (asv_simulator) StdoutLine: {'line': b'--   Found libzmq , version 4.3.4\n'}
+[2.807196] (-) TimerEvent: {}
+[2.822155] (asv_simulator) StdoutLine: {'line': b'-- Found ZeroMQ: TRUE (Required is at least version "4") \n'}
+[2.836188] (asv_simulator) StdoutLine: {'line': b"-- Checking for module 'uuid'\n"}
+[2.857426] (asv_simulator) StdoutLine: {'line': b'--   Found uuid, version 2.37.2\n'}
+[2.907537] (-) TimerEvent: {}
+[2.914777] (asv_simulator) StdoutLine: {'line': b'-- Found UUID: TRUE  \n'}
+[2.915278] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[2.920511] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-msgs10 -- found version 10.3.2\n'}
+[2.920874] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-msgs10\n'}
+[2.947061] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[2.947964] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.6.0\n'}
+[2.967306] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-transport13> component [log]\n'}
+[2.969984] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-transport13-log -- found version 13.5.0\n'}
+[2.970360] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-transport13-log\n'}
+[2.971313] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-transport13> component [parameters]\n'}
+[2.973783] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-transport13-parameters -- found version 13.5.0\n'}
+[2.974198] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-transport13-parameters\n'}
+[2.975199] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-msgs10 -- found version 10.3.2\n'}
+[2.980882] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.8.0\n'}
+[2.981622] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5\n'}
+[2.982127] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[2.982589] (asv_simulator) StdoutLine: {'line': b'-- Looking for dlfcn.h - found\n'}
+[2.983442] (asv_simulator) StdoutLine: {'line': b'-- Looking for libdl - found\n'}
+[2.984703] (asv_simulator) StdoutLine: {'line': b'-- Found DL: TRUE  \n'}
+[2.996282] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-common5> component [av]\n'}
+[3.001868] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-common5-av -- found version 5.8.0\n'}
+[3.002469] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-av\n'}
+[3.007716] (-) TimerEvent: {}
+[3.011341] (asv_simulator) StdoutLine: {'line': b"-- Checking for module 'libswscale'\n"}
+[3.028274] (asv_simulator) StdoutLine: {'line': b'--   Found libswscale, version 5.9.100\n'}
+[3.096739] (asv_simulator) StdoutLine: {'line': b'-- Found SWSCALE: TRUE  \n'}
+[3.107846] (-) TimerEvent: {}
+[3.109659] (asv_simulator) StdoutLine: {'line': b"-- Checking for module 'libavdevice >= 56.4.100'\n"}
+[3.130898] (asv_simulator) StdoutLine: {'line': b'--   Found libavdevice , version 58.13.100\n'}
+[3.202635] (asv_simulator) StdoutLine: {'line': b'-- Found AVDEVICE: TRUE (Required is at least version "56.4.100") \n'}
+[3.208048] (-) TimerEvent: {}
+[3.212194] (asv_simulator) StdoutLine: {'line': b"-- Checking for module 'libavformat'\n"}
+[3.234270] (asv_simulator) StdoutLine: {'line': b'--   Found libavformat, version 58.76.100\n'}
+[3.299256] (asv_simulator) StdoutLine: {'line': b'-- Found AVFORMAT: TRUE  \n'}
+[3.306209] (asv_simulator) StdoutLine: {'line': b"-- Checking for module 'libavcodec'\n"}
+[3.308289] (-) TimerEvent: {}
+[3.329753] (asv_simulator) StdoutLine: {'line': b'--   Found libavcodec, version 58.134.100\n'}
+[3.399686] (asv_simulator) StdoutLine: {'line': b'-- Found AVCODEC: TRUE  \n'}
+[3.408723] (-) TimerEvent: {}
+[3.417126] (asv_simulator) StdoutLine: {'line': b"-- Checking for module 'libavutil'\n"}
+[3.438246] (asv_simulator) StdoutLine: {'line': b'--   Found libavutil, version 56.70.100\n'}
+[3.503712] (asv_simulator) StdoutLine: {'line': b'-- Found AVUTIL: TRUE  \n'}
+[3.504739] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-common5> component [events]\n'}
+[3.508851] (-) TimerEvent: {}
+[3.512131] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-common5-events -- found version 5.8.0\n'}
+[3.513318] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-events\n'}
+[3.514302] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.6.0\n'}
+[3.514792] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-common5> component [graphics]\n'}
+[3.517466] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-common5-graphics -- found version 5.8.0\n'}
+[3.517921] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-graphics\n'}
+[3.518269] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.6.0\n'}
+[3.527102] (asv_simulator) StdoutLine: {'line': b'-- Found GzAssimp: TRUE (found version "5.2.0") \n'}
+[3.528279] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-common5> component [io]\n'}
+[3.532896] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-common5-io -- found version 5.8.0\n'}
+[3.533252] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-io\n'}
+[3.533567] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-common5> component [profiler]\n'}
+[3.536304] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-common5-profiler -- found version 5.8.0\n'}
+[3.536595] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-profiler\n'}
+[3.540978] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-fuel_tools9 -- found version 9.1.1\n'}
+[3.542046] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-fuel_tools9\n'}
+[3.609125] (-) TimerEvent: {}
+[3.685222] (asv_simulator) StdoutLine: {'line': b'-- Found CURL: /usr/lib/x86_64-linux-gnu/libcurl.so (found version "7.81.0")  \n'}
+[3.706641] (asv_simulator) StdoutLine: {'line': b"-- Checking for module 'jsoncpp'\n"}
+[3.709281] (-) TimerEvent: {}
+[3.726808] (asv_simulator) StdoutLine: {'line': b'--   Found jsoncpp, version 1.9.5\n'}
+[3.796073] (asv_simulator) StdoutLine: {'line': b'-- Found JSONCPP: TRUE  \n'}
+[3.806814] (asv_simulator) StdoutLine: {'line': b"-- Checking for module 'libzip'\n"}
+[3.809544] (-) TimerEvent: {}
+[3.829720] (asv_simulator) StdoutLine: {'line': b'--   Found libzip, version 1.7.3\n'}
+[3.890621] (asv_simulator) StdoutLine: {'line': b'-- Found ZIP: TRUE  \n'}
+[3.891476] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[3.892042] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.8.0\n'}
+[3.892746] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5\n'}
+[3.893320] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[3.893419] (asv_simulator) StdoutLine: {'line': b'-- Looking for dlfcn.h - found\n'}
+[3.893466] (asv_simulator) StdoutLine: {'line': b'-- Looking for libdl - found\n'}
+[3.903149] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-common5> component [testing]\n'}
+[3.909894] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-common5-testing -- found version 5.8.0\n'}
+[3.910539] (-) TimerEvent: {}
+[3.910947] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-testing\n'}
+[3.914351] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.6.0\n'}
+[3.914868] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-msgs10 -- found version 10.3.2\n'}
+[3.920887] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-gui8 -- found version 8.4.0\n'}
+[3.921313] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-gui8\n'}
+[3.975430] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[3.976637] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.6.0\n'}
+[3.977375] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.8.0\n'}
+[3.978139] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-plugin2 -- found version 2.0.4\n'}
+[3.978965] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-transport13 -- found version 13.5.0\n'}
+[3.985981] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-rendering8 -- found version 8.2.3\n'}
+[3.986632] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-rendering8\n'}
+[3.986934] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.6.0\n'}
+[3.987582] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-math7\n'}
+[3.987942] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[3.988168] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-math7> component [eigen3]\n'}
+[3.993016] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-math7-eigen3 -- found version 7.6.0\n'}
+[3.993690] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-math7-eigen3\n'}
+[4.003298] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.8.0\n'}
+[4.003480] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5\n'}
+[4.003801] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[4.003992] (asv_simulator) StdoutLine: {'line': b'-- Looking for dlfcn.h - found\n'}
+[4.004068] (asv_simulator) StdoutLine: {'line': b'-- Looking for libdl - found\n'}
+[4.010922] (-) TimerEvent: {}
+[4.016742] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-common5> component [graphics]\n'}
+[4.017376] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-common5> component [events]\n'}
+[4.017898] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-common5> component [geospatial]\n'}
+[4.023137] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-common5-geospatial -- found version 5.8.0\n'}
+[4.024061] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-geospatial\n'}
+[4.024601] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.6.0\n'}
+[4.025356] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.8.0\n'}
+[4.026858] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-plugin2 -- found version 2.0.4\n'}
+[4.027494] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-plugin2\n'}
+[4.027856] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[4.028076] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-plugin2> component [all]\n'}
+[4.032759] (asv_simulator) StdoutLine: {'line': b'-- Looking for all libraries of gz-plugin2 -- found version 2.0.4\n'}
+[4.033440] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-plugin2 -- found version 2.0.4\n'}
+[4.035928] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[4.047075] (asv_simulator) StdoutLine: {'line': b'-- Found OpenGL: /usr/lib/x86_64-linux-gnu/libOpenGL.so  found components: OpenGL \n'}
+[4.051346] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-msgs10 -- found version 10.3.2\n'}
+[4.111299] (-) TimerEvent: {}
+[4.115428] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-physics7 -- found version 7.7.0\n'}
+[4.116329] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-physics7\n'}
+[4.116658] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.8.0\n'}
+[4.117400] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.6.0\n'}
+[4.117870] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-plugin2 -- found version 2.0.4\n'}
+[4.118492] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[4.120975] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-physics7> component [heightmap]\n'}
+[4.127486] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-physics7-heightmap -- found version 7.7.0\n'}
+[4.128718] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-physics7-heightmap\n'}
+[4.129425] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.8.0\n'}
+[4.130691] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-physics7> component [mesh]\n'}
+[4.135643] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-physics7-mesh -- found version 7.7.0\n'}
+[4.136253] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-physics7-mesh\n'}
+[4.136560] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.8.0\n'}
+[4.137458] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-physics7> component [sdf]\n'}
+[4.143426] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-physics7-sdf -- found version 7.7.0\n'}
+[4.144693] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-physics7-sdf\n'}
+[4.145743] (asv_simulator) StdoutLine: {'line': b'-- Looking for sdformat14 -- found version 14.9.0\n'}
+[4.159830] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.2\n'}
+[4.161280] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8\n'}
+[4.193786] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.6.0\n'}
+[4.195155] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.8.0\n'}
+[4.196490] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-transport13 -- found version 13.5.0\n'}
+[4.197497] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-rendering8 -- found version 8.2.3\n'}
+[4.198585] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-msgs10 -- found version 10.3.2\n'}
+[4.199411] (asv_simulator) StdoutLine: {'line': b'-- Looking for sdformat14 -- found version 14.9.0\n'}
+[4.200613] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [air_pressure]\n'}
+[4.205703] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8-air_pressure -- found version 8.2.2\n'}
+[4.206364] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-air_pressure\n'}
+[4.207789] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [air_speed]\n'}
+[4.211521] (-) TimerEvent: {}
+[4.215341] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8-air_speed -- found version 8.2.2\n'}
+[4.215967] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-air_speed\n'}
+[4.217191] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [altimeter]\n'}
+[4.221879] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8-altimeter -- found version 8.2.2\n'}
+[4.222416] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-altimeter\n'}
+[4.223330] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [imu]\n'}
+[4.230670] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8-imu -- found version 8.2.2\n'}
+[4.231494] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-imu\n'}
+[4.232508] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [force_torque]\n'}
+[4.237132] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8-force_torque -- found version 8.2.2\n'}
+[4.237682] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-force_torque\n'}
+[4.238580] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [logical_camera]\n'}
+[4.244930] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8-logical_camera -- found version 8.2.2\n'}
+[4.246106] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-logical_camera\n'}
+[4.247658] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [magnetometer]\n'}
+[4.255265] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8-magnetometer -- found version 8.2.2\n'}
+[4.256328] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-magnetometer\n'}
+[4.257992] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [navsat]\n'}
+[4.263952] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8-navsat -- found version 8.2.2\n'}
+[4.264980] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-navsat\n'}
+[4.266872] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [dvl]\n'}
+[4.276436] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8-dvl -- found version 8.2.2\n'}
+[4.277281] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-dvl\n'}
+[4.278128] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.2\n'}
+[4.279153] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8\n'}
+[4.311816] (-) TimerEvent: {}
+[4.325303] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.6.0\n'}
+[4.326148] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.8.0\n'}
+[4.326581] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-transport13 -- found version 13.5.0\n'}
+[4.327317] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-rendering8 -- found version 8.2.3\n'}
+[4.327578] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-msgs10 -- found version 10.3.2\n'}
+[4.328480] (asv_simulator) StdoutLine: {'line': b'-- Looking for sdformat14 -- found version 14.9.0\n'}
+[4.328684] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [rendering]\n'}
+[4.334145] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8-rendering -- found version 8.2.2\n'}
+[4.334701] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-rendering\n'}
+[4.336116] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [rendering]\n'}
+[4.336424] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [lidar]\n'}
+[4.338760] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8-lidar -- found version 8.2.2\n'}
+[4.339159] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-lidar\n'}
+[4.339445] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.2\n'}
+[4.340111] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [gpu_lidar]\n'}
+[4.346423] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8-gpu_lidar -- found version 8.2.2\n'}
+[4.347508] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-gpu_lidar\n'}
+[4.348415] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.2\n'}
+[4.350877] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [camera]\n'}
+[4.355569] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8-camera -- found version 8.2.2\n'}
+[4.355908] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-camera\n'}
+[4.356202] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.2\n'}
+[4.357056] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [boundingbox_camera]\n'}
+[4.360822] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8-boundingbox_camera -- found version 8.2.2\n'}
+[4.361788] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-boundingbox_camera\n'}
+[4.363282] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [segmentation_camera]\n'}
+[4.368681] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8-segmentation_camera -- found version 8.2.2\n'}
+[4.369207] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-segmentation_camera\n'}
+[4.369809] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [depth_camera]\n'}
+[4.372818] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8-depth_camera -- found version 8.2.2\n'}
+[4.373714] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-depth_camera\n'}
+[4.374529] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.2\n'}
+[4.381639] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [rgbd_camera]\n'}
+[4.392407] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8-rgbd_camera -- found version 8.2.2\n'}
+[4.393531] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-rgbd_camera\n'}
+[4.394215] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.2\n'}
+[4.396260] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [thermal_camera]\n'}
+[4.402519] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8-thermal_camera -- found version 8.2.2\n'}
+[4.403068] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-thermal_camera\n'}
+[4.403480] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.2\n'}
+[4.404465] (asv_simulator) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [wide_angle_camera]\n'}
+[4.412117] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8-wide_angle_camera -- found version 8.2.2\n'}
+[4.412700] (-) TimerEvent: {}
+[4.413378] (asv_simulator) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-wide_angle_camera\n'}
+[4.415906] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-rendering8 -- found version 8.2.3\n'}
+[4.416467] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.6.0\n'}
+[4.416858] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[4.452041] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.8.0\n'}
+[4.453057] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-fuel_tools9 -- found version 9.1.1\n'}
+[4.453954] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.6.0\n'}
+[4.454815] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-msgs10 -- found version 10.3.2\n'}
+[4.455816] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-transport13 -- found version 13.5.0\n'}
+[4.456684] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-plugin2 -- found version 2.0.4\n'}
+[4.457654] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-rendering8 -- found version 8.2.3\n'}
+[4.458782] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.2\n'}
+[4.459774] (asv_simulator) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.1\n'}
+[4.461919] (asv_simulator) StdoutLine: {'line': b'-- Looking for sdformat14 -- found version 14.9.0\n'}
+[4.468629] (asv_simulator) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.12.15 (/opt/ros/humble/share/ament_lint_auto/cmake)\n'}
+[4.512896] (-) TimerEvent: {}
+[4.613420] (-) TimerEvent: {}
+[4.620109] (asv_simulator) StdoutLine: {'line': b"-- Added test 'cppcheck' to perform static code analysis on C / C++ code\n"}
+[4.620259] (asv_simulator) StdoutLine: {'line': b'-- Configured cppcheck include dirs: $<BUILD_INTERFACE:/root/ros2_ws/src/asv_simulator/include>\n'}
+[4.620298] (asv_simulator) StdoutLine: {'line': b'-- Configured cppcheck exclude dirs and/or files: \n'}
+[4.622231] (asv_simulator) StdoutLine: {'line': b"-- Added test 'flake8' to check Python code syntax and style conventions\n"}
+[4.627347] (asv_simulator) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[4.631310] (asv_simulator) StdoutLine: {'line': b"-- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257\n"}
+[4.645889] (asv_simulator) StdoutLine: {'line': b"-- Added test 'uncrustify' to check C / C++ code style\n"}
+[4.646359] (asv_simulator) StdoutLine: {'line': b'-- Configured uncrustify additional arguments: \n'}
+[4.652621] (asv_simulator) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[4.657698] (asv_simulator) StdoutLine: {'line': b'-- Configuring done\n'}
+[4.698587] (asv_simulator) StdoutLine: {'line': b'-- Generating done\n'}
+[4.704243] (asv_simulator) StdoutLine: {'line': b'-- Build files have been written to: /root/ros2_ws/src/asv_simulator/build/asv_simulator\n'}
+[4.713829] (-) TimerEvent: {}
+[4.724273] (asv_simulator) CommandEnded: {'returncode': 0}
+[4.730323] (asv_simulator) JobProgress: {'identifier': 'asv_simulator', 'progress': 'build'}
+[4.730527] (asv_simulator) Command: {'cmd': ['/usr/bin/cmake', '--build', '/root/ros2_ws/src/asv_simulator/build/asv_simulator', '--', '-j12', '-l12'], 'cwd': '/root/ros2_ws/src/asv_simulator/build/asv_simulator', 'env': OrderedDict([('GZ_SIM_SYSTEM_PLUGIN_PATH', '/root/ros2_ws/install/vrx_gz/lib'), ('GZ_SIM_RESOURCE_PATH', '/root/ros2_ws/install/vrx_gz/share/vrx_gz/models/tmp:/root/ros2_ws/install/vrx_gz/share/vrx_gz/models:/root/ros2_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2:/root/ros2_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice:/root/ros2_ws/install/vrx_gz/share/vrx_gz/worlds:/root/ros2_ws/install/wamv_description/share/wamv_description/models:/root/ros2_ws/install/vrx_gazebo/share/vrx_gazebo/models:/root/ros2_ws/install/vrx_gazebo/share/::/root/ros2_ws/src/harmonic_demo:/root/ros2_ws/src/harmonic_demo/harmonic_demo:/root/ros2_ws/src/harmonic_demo:/root/ros2_ws/src/harmonic_demo/harmonic_demo'), ('HOSTNAME', 'jimlab'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/root/ros2_ws/src/asv_simulator/install/asv_simulator/lib:/root/ros2_ws/install/asv_simulator/lib:/root/ros2_ws/install/vrx_gz/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/root'), ('OLDPWD', '/root/ros2_ws'), ('ROS_PYTHON_VERSION', '3'), ('COLCON_PREFIX_PATH', '/root/ros2_ws/src/asv_simulator/install:/root/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('QT_X11_NO_MITSHM', '1'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'C.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/root/ros2_ws/src/asv_simulator/install/asv_simulator:/root/ros2_ws/install/vrx_gz:/root/ros2_ws/install/wamv_gazebo:/root/ros2_ws/install/wamv_description:/root/ros2_ws/install/vrx_ros:/root/ros2_ws/install/vrx_gazebo:/root/ros2_ws/install/map2gazebo:/root/ros2_ws/install/asv_simulator:/opt/ros/humble'), ('PWD', '/root/ros2_ws/src/asv_simulator/build/asv_simulator'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/root/ros2_ws/install/vrx_gz/local/lib/python3.10/dist-packages:/root/ros2_ws/install/vrx_gazebo/local/lib/python3.10/dist-packages:/root/ros2_ws/build/map2gazebo:/root/ros2_ws/install/map2gazebo/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/root/ros2_ws/src/asv_simulator/install/asv_simulator:/root/ros2_ws/install/vrx_gz:/root/ros2_ws/install/wamv_gazebo:/root/ros2_ws/install/wamv_description:/root/ros2_ws/install/vrx_ros:/root/ros2_ws/install/vrx_gazebo:/root/ros2_ws/install/asv_simulator:/root/ros2_ws/install/map2gazebo:/opt/ros/humble')]), 'shell': False}
+[4.813957] (-) TimerEvent: {}
+[4.821999] (asv_simulator) StdoutLine: {'line': b'[ 10%] \x1b[32mBuilding CXX object CMakeFiles/Waves.dir/plugins/Wavefield.cc.o\x1b[0m\n'}
+[4.914286] (-) TimerEvent: {}
+[5.015285] (-) TimerEvent: {}
+[5.115652] (-) TimerEvent: {}
+[5.216232] (-) TimerEvent: {}
+[5.316879] (-) TimerEvent: {}
+[5.417268] (-) TimerEvent: {}
+[5.517704] (-) TimerEvent: {}
+[5.618138] (-) TimerEvent: {}
+[5.718618] (-) TimerEvent: {}
+[5.818948] (-) TimerEvent: {}
+[5.919383] (-) TimerEvent: {}
+[6.019758] (-) TimerEvent: {}
+[6.120149] (-) TimerEvent: {}
+[6.220517] (-) TimerEvent: {}
+[6.320882] (-) TimerEvent: {}
+[6.421319] (-) TimerEvent: {}
+[6.521689] (-) TimerEvent: {}
+[6.622128] (-) TimerEvent: {}
+[6.722565] (-) TimerEvent: {}
+[6.822969] (-) TimerEvent: {}
+[6.923457] (-) TimerEvent: {}
+[7.024256] (-) TimerEvent: {}
+[7.125126] (-) TimerEvent: {}
+[7.225775] (-) TimerEvent: {}
+[7.326230] (-) TimerEvent: {}
+[7.426970] (-) TimerEvent: {}
+[7.527773] (-) TimerEvent: {}
+[7.628451] (-) TimerEvent: {}
+[7.656348] (asv_simulator) StderrLine: {'line': b'\x1b[01m\x1b[K/root/ros2_ws/src/asv_simulator/plugins/Wavefield.cc:\x1b[m\x1b[K In constructor \xe2\x80\x98\x1b[01m\x1b[Kasv::WavefieldPrivate::WavefieldPrivate()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[7.656631] (asv_simulator) StderrLine: {'line': b'\x1b[01m\x1b[K/root/ros2_ws/src/asv_simulator/plugins/Wavefield.cc:137:18:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kasv::WavefieldPrivate::wavenumber\x1b[m\x1b[K\xe2\x80\x99 will be initialized after [\x1b[01;35m\x1b[K-Wreorder\x1b[m\x1b[K]\n'}
+[7.656750] (asv_simulator) StderrLine: {'line': b'  137 |   public: double \x1b[01;35m\x1b[Kwavenumber\x1b[m\x1b[K;\n'}
+[7.656845] (asv_simulator) StderrLine: {'line': b'      |                  \x1b[01;35m\x1b[K^~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.656935] (asv_simulator) StderrLine: {'line': b'\x1b[01m\x1b[K/root/ros2_ws/src/asv_simulator/plugins/Wavefield.cc:125:18:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K  \xe2\x80\x98\x1b[01m\x1b[Kdouble asv::WavefieldPrivate::tau\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K-Wreorder\x1b[m\x1b[K]\n'}
+[7.657039] (asv_simulator) StderrLine: {'line': b'  125 |   public: double \x1b[01;35m\x1b[Ktau\x1b[m\x1b[K;\n'}
+[7.657135] (asv_simulator) StderrLine: {'line': b'      |                  \x1b[01;35m\x1b[K^~~\x1b[m\x1b[K\n'}
+[7.657241] (asv_simulator) StderrLine: {'line': b'\x1b[01m\x1b[K/root/ros2_ws/src/asv_simulator/plugins/Wavefield.cc:50:11:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K  when initialized here [\x1b[01;35m\x1b[K-Wreorder\x1b[m\x1b[K]\n'}
+[7.657339] (asv_simulator) StderrLine: {'line': b'   50 |   public: \x1b[01;35m\x1b[KWavefieldPrivate\x1b[m\x1b[K():\n'}
+[7.657443] (asv_simulator) StderrLine: {'line': b'      |           \x1b[01;35m\x1b[K^~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.724841] (asv_simulator) StderrLine: {'line': b'/root/ros2_ws/src/asv_simulator/plugins/Wavefield.cc: In instantiation of \xe2\x80\x98\x1b[01m\x1b[Kasv::Wavefield::ComputeDepthDirectly(const Vector3d&, double, double)::<lambda(auto:24, auto:25, auto:26, auto:27&, auto:28&, auto:29&)> [with auto:24 = Eigen::Matrix<double, 2, 1>; auto:25 = Eigen::Matrix<double, 2, 1>; auto:26 = double; auto:27 = asv::Wavefield::ComputeDepthDirectly(const Vector3d&, double, double)::WaveParams; auto:28 = Eigen::Matrix<double, 2, 1>; auto:29 = Eigen::Matrix<double, 2, 2>]\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[7.725086] (asv_simulator) StderrLine: {'line': b'\x1b[01m\x1b[K/root/ros2_ws/src/asv_simulator/plugins/Wavefield.cc:852:18:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Kasv::Wavefield::ComputeDepthDirectly(const Vector3d&, double, double)::<lambda(auto:30&, auto:31, auto:32, auto:33, auto:34&, auto:35, auto:36)> [with auto:30 = asv::Wavefield::ComputeDepthDirectly(const Vector3d&, double, double)::<lambda(auto:24, auto:25, auto:26, auto:27&, auto:28&, auto:29&)>; auto:31 = Eigen::Matrix<double, 2, 1>; auto:32 = Eigen::Matrix<double, 2, 1>; auto:33 = double; auto:34 = asv::Wavefield::ComputeDepthDirectly(const Vector3d&, double, double)::WaveParams; auto:35 = double; auto:36 = double]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.725186] (asv_simulator) StderrLine: {'line': b'\x1b[01m\x1b[K/root/ros2_ws/src/asv_simulator/plugins/Wavefield.cc:877:27:\x1b[m\x1b[K   required from here\n'}
+[7.725273] (asv_simulator) StderrLine: {'line': b'\x1b[01m\x1b[K/root/ros2_ws/src/asv_simulator/plugins/Wavefield.cc:809:26:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kcomparison of integer expressions of different signedness: \xe2\x80\x98\x1b[01m\x1b[Kint\x1b[m\x1b[K\xe2\x80\x99 and \xe2\x80\x98\x1b[01m\x1b[Kconst size_t\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Kconst long unsigned int\x1b[m\x1b[K\xe2\x80\x99} [\x1b[01;35m\x1b[K-Wsign-compare\x1b[m\x1b[K]\n'}
+[7.725359] (asv_simulator) StderrLine: {'line': b'  809 |     for (auto&& i = 0; \x1b[01;35m\x1b[Ki < n\x1b[m\x1b[K; ++i) // NOLINT\n'}
+[7.725441] (asv_simulator) StderrLine: {'line': b'      |                        \x1b[01;35m\x1b[K~~^~~\x1b[m\x1b[K\n'}
+[7.728665] (-) TimerEvent: {}
+[7.829103] (-) TimerEvent: {}
+[7.929866] (-) TimerEvent: {}
+[8.030505] (-) TimerEvent: {}
+[8.131159] (-) TimerEvent: {}
+[8.231571] (-) TimerEvent: {}
+[8.332088] (-) TimerEvent: {}
+[8.432650] (-) TimerEvent: {}
+[8.532958] (-) TimerEvent: {}
+[8.633261] (-) TimerEvent: {}
+[8.733634] (-) TimerEvent: {}
+[8.833977] (-) TimerEvent: {}
+[8.934307] (-) TimerEvent: {}
+[9.034642] (-) TimerEvent: {}
+[9.049063] (asv_simulator) StdoutLine: {'line': b'[ 20%] \x1b[32m\x1b[1mLinking CXX shared library libASVWaves.so\x1b[0m\n'}
+[9.134762] (-) TimerEvent: {}
+[9.235105] (-) TimerEvent: {}
+[9.335634] (-) TimerEvent: {}
+[9.397991] (asv_simulator) StdoutLine: {'line': b'[ 20%] Built target Waves\n'}
+[9.435853] (-) TimerEvent: {}
+[9.455200] (asv_simulator) StdoutLine: {'line': b'[ 30%] \x1b[32mBuilding CXX object CMakeFiles/Surface.dir/plugins/Surface.cc.o\x1b[0m\n'}
+[9.462585] (asv_simulator) StdoutLine: {'line': b'[ 40%] \x1b[32mBuilding CXX object CMakeFiles/PolyhedraBuoyancyDrag.dir/plugins/PolyhedraBuoyancyDrag.cc.o\x1b[0m\n'}
+[9.463345] (asv_simulator) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/WaveVisual.dir/plugins/WaveVisual.cc.o\x1b[0m\n'}
+[9.465181] (asv_simulator) StdoutLine: {'line': b'[ 60%] \x1b[32mBuilding CXX object CMakeFiles/PolyhedraBuoyancyDrag.dir/plugins/PolyhedronVolume.cc.o\x1b[0m\n'}
+[9.470374] (asv_simulator) StdoutLine: {'line': b'[ 70%] \x1b[32mBuilding CXX object CMakeFiles/PolyhedraBuoyancyDrag.dir/plugins/ShapeVolume.cc.o\x1b[0m\n'}
+[9.536032] (-) TimerEvent: {}
+[9.636434] (-) TimerEvent: {}
+[9.736784] (-) TimerEvent: {}
+[9.837098] (-) TimerEvent: {}
+[9.937466] (-) TimerEvent: {}
+[10.037856] (-) TimerEvent: {}
+[10.115952] (asv_simulator) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/usr/include/c++/11/cassert:44\x1b[m\x1b[K,\n'}
+[10.116211] (asv_simulator) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/root/ros2_ws/src/asv_simulator/plugins/PolyhedronVolume.cc:18\x1b[m\x1b[K:\n'}
+[10.116351] (asv_simulator) StderrLine: {'line': b'\x1b[01m\x1b[K/root/ros2_ws/src/asv_simulator/plugins/PolyhedronVolume.cc:\x1b[m\x1b[K In static member function \xe2\x80\x98\x1b[01m\x1b[Kstatic asv::Polyhedron asv::Polyhedron::makeCylinder(double, double, int)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[10.116457] (asv_simulator) StderrLine: {'line': b'\x1b[01m\x1b[K/root/ros2_ws/src/asv_simulator/plugins/PolyhedronVolume.cc:126:35:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kcomparison of integer expressions of different signedness: \xe2\x80\x98\x1b[01m\x1b[Kstd::vector<gz::math::v7::Vector3<double> >::size_type\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Klong unsigned int\x1b[m\x1b[K\xe2\x80\x99} and \xe2\x80\x98\x1b[01m\x1b[Kint\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K-Wsign-compare\x1b[m\x1b[K]\n'}
+[10.116591] (asv_simulator) StderrLine: {'line': b'  126 |   assert(\x1b[01;35m\x1b[Kcylinder.vertices.size() == 2 * _n + 2\x1b[m\x1b[K);\n'}
+[10.116705] (asv_simulator) StderrLine: {'line': b'      |          \x1b[01;35m\x1b[K~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[10.116800] (asv_simulator) StderrLine: {'line': b'\x1b[01m\x1b[K/root/ros2_ws/src/asv_simulator/plugins/PolyhedronVolume.cc:127:32:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kcomparison of integer expressions of different signedness: \xe2\x80\x98\x1b[01m\x1b[Kstd::vector<asv::Polyhedron::Face>::size_type\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Klong unsigned int\x1b[m\x1b[K\xe2\x80\x99} and \xe2\x80\x98\x1b[01m\x1b[Kint\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K-Wsign-compare\x1b[m\x1b[K]\n'}
+[10.116900] (asv_simulator) StderrLine: {'line': b'  127 |   assert(\x1b[01;35m\x1b[Kcylinder.faces.size() == 4 * _n\x1b[m\x1b[K);\n'}
+[10.117000] (asv_simulator) StderrLine: {'line': b'      |          \x1b[01;35m\x1b[K~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~\x1b[m\x1b[K\n'}
+[10.138029] (-) TimerEvent: {}
+[10.238478] (-) TimerEvent: {}
+[10.338925] (-) TimerEvent: {}
+[10.439471] (-) TimerEvent: {}
+[10.539920] (-) TimerEvent: {}
+[10.640706] (-) TimerEvent: {}
+[10.741572] (-) TimerEvent: {}
+[10.842236] (-) TimerEvent: {}
+[10.942755] (-) TimerEvent: {}
+[11.043678] (-) TimerEvent: {}
+[11.144706] (-) TimerEvent: {}
+[11.245930] (-) TimerEvent: {}
+[11.346899] (-) TimerEvent: {}
+[11.447764] (-) TimerEvent: {}
+[11.548441] (-) TimerEvent: {}
+[11.649162] (-) TimerEvent: {}
+[11.749609] (-) TimerEvent: {}
+[11.850076] (-) TimerEvent: {}
+[11.950543] (-) TimerEvent: {}
+[12.050948] (-) TimerEvent: {}
+[12.151383] (-) TimerEvent: {}
+[12.251804] (-) TimerEvent: {}
+[12.352261] (-) TimerEvent: {}
+[12.452718] (-) TimerEvent: {}
+[12.553098] (-) TimerEvent: {}
+[12.653544] (-) TimerEvent: {}
+[12.754058] (-) TimerEvent: {}
+[12.854532] (-) TimerEvent: {}
+[12.954983] (-) TimerEvent: {}
+[13.055510] (-) TimerEvent: {}
+[13.156005] (-) TimerEvent: {}
+[13.256716] (-) TimerEvent: {}
+[13.357765] (-) TimerEvent: {}
+[13.458615] (-) TimerEvent: {}
+[13.559499] (-) TimerEvent: {}
+[13.660462] (-) TimerEvent: {}
+[13.761580] (-) TimerEvent: {}
+[13.862792] (-) TimerEvent: {}
+[13.964075] (-) TimerEvent: {}
+[14.064611] (-) TimerEvent: {}
+[14.165124] (-) TimerEvent: {}
+[14.265624] (-) TimerEvent: {}
+[14.365981] (-) TimerEvent: {}
+[14.466448] (-) TimerEvent: {}
+[14.566866] (-) TimerEvent: {}
+[14.667272] (-) TimerEvent: {}
+[14.767703] (-) TimerEvent: {}
+[14.868180] (-) TimerEvent: {}
+[14.968630] (-) TimerEvent: {}
+[14.978116] (asv_simulator) StdoutLine: {'line': b'[ 80%] \x1b[32m\x1b[1mLinking CXX shared library libASVWaveVisual.so\x1b[0m\n'}
+[15.068817] (-) TimerEvent: {}
+[15.169368] (-) TimerEvent: {}
+[15.269798] (-) TimerEvent: {}
+[15.370234] (-) TimerEvent: {}
+[15.470798] (-) TimerEvent: {}
+[15.519260] (asv_simulator) StdoutLine: {'line': b'[ 80%] Built target WaveVisual\n'}
+[15.570974] (-) TimerEvent: {}
+[15.671342] (-) TimerEvent: {}
+[15.771778] (-) TimerEvent: {}
+[15.872174] (-) TimerEvent: {}
+[15.972661] (-) TimerEvent: {}
+[16.073326] (-) TimerEvent: {}
+[16.174292] (-) TimerEvent: {}
+[16.275135] (-) TimerEvent: {}
+[16.375947] (-) TimerEvent: {}
+[16.476746] (-) TimerEvent: {}
+[16.577904] (-) TimerEvent: {}
+[16.678790] (-) TimerEvent: {}
+[16.779599] (-) TimerEvent: {}
+[16.880653] (-) TimerEvent: {}
+[16.981654] (-) TimerEvent: {}
+[17.082049] (-) TimerEvent: {}
+[17.182534] (-) TimerEvent: {}
+[17.282936] (-) TimerEvent: {}
+[17.383322] (-) TimerEvent: {}
+[17.476271] (asv_simulator) StdoutLine: {'line': b'[ 90%] \x1b[32m\x1b[1mLinking CXX shared library libASVPolyhedraBuoyancyDrag.so\x1b[0m\n'}
+[17.483823] (-) TimerEvent: {}
+[17.584907] (-) TimerEvent: {}
+[17.685347] (-) TimerEvent: {}
+[17.785959] (-) TimerEvent: {}
+[17.886618] (-) TimerEvent: {}
+[17.907031] (asv_simulator) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX shared library libASVSurface.so\x1b[0m\n'}
+[17.970313] (asv_simulator) StdoutLine: {'line': b'[100%] Built target PolyhedraBuoyancyDrag\n'}
+[17.986698] (-) TimerEvent: {}
+[18.087384] (-) TimerEvent: {}
+[18.188527] (-) TimerEvent: {}
+[18.289033] (-) TimerEvent: {}
+[18.314922] (asv_simulator) StdoutLine: {'line': b'[100%] Built target Surface\n'}
+[18.338177] (asv_simulator) CommandEnded: {'returncode': 0}
+[18.340519] (asv_simulator) JobProgress: {'identifier': 'asv_simulator', 'progress': 'install'}
+[18.363349] (asv_simulator) Command: {'cmd': ['/usr/bin/cmake', '--install', '/root/ros2_ws/src/asv_simulator/build/asv_simulator'], 'cwd': '/root/ros2_ws/src/asv_simulator/build/asv_simulator', 'env': OrderedDict([('GZ_SIM_SYSTEM_PLUGIN_PATH', '/root/ros2_ws/install/vrx_gz/lib'), ('GZ_SIM_RESOURCE_PATH', '/root/ros2_ws/install/vrx_gz/share/vrx_gz/models/tmp:/root/ros2_ws/install/vrx_gz/share/vrx_gz/models:/root/ros2_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2:/root/ros2_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice:/root/ros2_ws/install/vrx_gz/share/vrx_gz/worlds:/root/ros2_ws/install/wamv_description/share/wamv_description/models:/root/ros2_ws/install/vrx_gazebo/share/vrx_gazebo/models:/root/ros2_ws/install/vrx_gazebo/share/::/root/ros2_ws/src/harmonic_demo:/root/ros2_ws/src/harmonic_demo/harmonic_demo:/root/ros2_ws/src/harmonic_demo:/root/ros2_ws/src/harmonic_demo/harmonic_demo'), ('HOSTNAME', 'jimlab'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/root/ros2_ws/src/asv_simulator/install/asv_simulator/lib:/root/ros2_ws/install/asv_simulator/lib:/root/ros2_ws/install/vrx_gz/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/root'), ('OLDPWD', '/root/ros2_ws'), ('ROS_PYTHON_VERSION', '3'), ('COLCON_PREFIX_PATH', '/root/ros2_ws/src/asv_simulator/install:/root/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('QT_X11_NO_MITSHM', '1'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'C.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/root/ros2_ws/src/asv_simulator/install/asv_simulator:/root/ros2_ws/install/vrx_gz:/root/ros2_ws/install/wamv_gazebo:/root/ros2_ws/install/wamv_description:/root/ros2_ws/install/vrx_ros:/root/ros2_ws/install/vrx_gazebo:/root/ros2_ws/install/map2gazebo:/root/ros2_ws/install/asv_simulator:/opt/ros/humble'), ('PWD', '/root/ros2_ws/src/asv_simulator/build/asv_simulator'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/root/ros2_ws/install/vrx_gz/local/lib/python3.10/dist-packages:/root/ros2_ws/install/vrx_gazebo/local/lib/python3.10/dist-packages:/root/ros2_ws/build/map2gazebo:/root/ros2_ws/install/map2gazebo/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/root/ros2_ws/src/asv_simulator/install/asv_simulator:/root/ros2_ws/install/vrx_gz:/root/ros2_ws/install/wamv_gazebo:/root/ros2_ws/install/wamv_description:/root/ros2_ws/install/vrx_ros:/root/ros2_ws/install/vrx_gazebo:/root/ros2_ws/install/asv_simulator:/root/ros2_ws/install/map2gazebo:/opt/ros/humble')]), 'shell': False}
+[18.371805] (asv_simulator) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[18.372533] (asv_simulator) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[18.373000] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/lib/libASVWaves.so\n'}
+[18.389145] (-) TimerEvent: {}
+[18.389428] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/lib/libASVSurface.so\n'}
+[18.397124] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/lib/libASVWaveVisual.so\n'}
+[18.412458] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/lib/libASVPolyhedraBuoyancyDrag.so\n'}
+[18.429606] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/lib/asv_simulator/virtual_sonar.py\n'}
+[18.438447] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/launch/sim.launch.py\n'}
+[18.460357] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/models/depths/meshes/depth.stl\n'}
+[18.470293] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/models/depths/model.config\n'}
+[18.484403] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/models/harbour/meshes/map.stl\n'}
+[18.489403] (-) TimerEvent: {}
+[18.496431] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/models/harbour/model.config\n'}
+[18.504194] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/models/harbour/model.sdf\n'}
+[18.515262] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/models/vessel_v1/model.config\n'}
+[18.524652] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/models/vessel_v1/vessel_v1.sdf\n'}
+[18.537024] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/models/vessel_v2/meshes/vessel_propeller_simplified.stl\n'}
+[18.557100] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/models/vessel_v2/meshes/vessel_simplified.stl\n'}
+[18.569126] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/models/vessel_v2/model.config\n'}
+[18.581419] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/models/vessel_v2/vessel_v2.sdf\n'}
+[18.588946] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/models/vessel_v3/meshes/vessel_propeller_simplified.stl\n'}
+[18.589424] (-) TimerEvent: {}
+[18.598705] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/models/vessel_v3/meshes/vessel_simplified.stl\n'}
+[18.609342] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/models/vessel_v3/model.config\n'}
+[18.619694] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/models/vessel_v3/vessel_v3.sdf\n'}
+[18.639571] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/urdf/vessel_v2.urdf\n'}
+[18.662065] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/configs/depth_map.tif\n'}
+[18.673206] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/configs/internal_bay_deposit_resampled.tif\n'}
+[18.689960] (-) TimerEvent: {}
+[18.695673] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/configs/vessel_viz.rviz\n'}
+[18.708254] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/worlds/depth_gazebo_513_bit_clean.png\n'}
+[18.719240] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/worlds/depth_map_513_16bit.png\n'}
+[18.745653] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/worlds/depth_map_513_8bit.png\n'}
+[18.765779] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/worlds/ocean_world.sdf\n'}
+[18.776905] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/worlds/ocean_world_waves.sdf\n'}
+[18.790199] (-) TimerEvent: {}
+[18.795191] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/include/asv_simulator/PolyhedraBuoyancyDrag.hh\n'}
+[18.811648] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/include/asv_simulator/PolyhedronVolume.hh\n'}
+[18.821034] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/include/asv_simulator/ShapeVolume.hh\n'}
+[18.846975] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/include/asv_simulator/Surface.hh\n'}
+[18.870152] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/include/asv_simulator/WaveVisual.hh\n'}
+[18.887484] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/include/asv_simulator/Wavefield.hh\n'}
+[18.890404] (-) TimerEvent: {}
+[18.903633] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/include/depth_table.csv\n'}
+[18.918500] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/ament_index/resource_index/package_run_dependencies/asv_simulator\n'}
+[18.933408] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/ament_index/resource_index/parent_prefix_path/asv_simulator\n'}
+[18.959248] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/environment/ament_prefix_path.sh\n'}
+[18.977853] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/environment/ament_prefix_path.dsv\n'}
+[18.985865] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/environment/path.sh\n'}
+[18.990816] (-) TimerEvent: {}
+[19.000697] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/environment/path.dsv\n'}
+[19.017017] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/local_setup.bash\n'}
+[19.030597] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/local_setup.sh\n'}
+[19.056845] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/local_setup.zsh\n'}
+[19.068090] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/local_setup.dsv\n'}
+[19.082887] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/package.dsv\n'}
+[19.090901] (-) TimerEvent: {}
+[19.093114] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/ament_index/resource_index/packages/asv_simulator\n'}
+[19.104677] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/cmake/asv_simulatorConfig.cmake\n'}
+[19.119005] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/cmake/asv_simulatorConfig-version.cmake\n'}
+[19.133755] (asv_simulator) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/src/asv_simulator/install/asv_simulator/share/asv_simulator/package.xml\n'}
+[19.160070] (asv_simulator) CommandEnded: {'returncode': 0}
+[19.191039] (-) TimerEvent: {}
+[19.196255] (asv_simulator) JobEnded: {'identifier': 'asv_simulator', 'rc': 0}
+[19.196898] (-) EventReactorShutdown: {}

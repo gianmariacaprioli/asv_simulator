@@ -265,27 +265,27 @@ void Surface::PreUpdate(const sim::UpdateInfo &_info,
 
     // Apply force at the point.
     // Position is in the link frame and force is in world frame.
-    gzmsg << "Buoy force = "
-      << kBuoyForce
-      << std::endl;
-    gzmsg << "Body point = "
-      << bpnt
-      << std::endl;
+    // gzmsg << "Buoy force = "
+    //   << kBuoyForce
+    //   << std::endl;
+    // gzmsg << "Body point = "
+    //   << bpnt
+    //   << std::endl;
     this->dataPtr->link.AddWorldForce(_ecm,
       math::Vector3d(0, 0, kBuoyForce),
       bpnt);
 
     // Debug output:
-    // gzdbg << bpnt.X() << "," << bpnt.Y() << "," << bpnt.Z() << std::endl;
-    // gzdbg << "depth: " << depth << std::endl;
-    // gzdbg << "dz: " << dz << std::endl;
-    // gzdbg << "kDdz: " << kDdz << std::endl;
-    // gzdbg << "deltaZ: " << deltaZ << std::endl;
-    // gzdbg << "hull radius: " << this->dataPtr->hullRadius << std::endl;
-    // gzdbg << "vehicle length: " << this->dataPtr->hullLength << std::endl;
-    // gzdbg << "gravity z: " << -this->dataPtr->gravity.Z() << std::endl;
-    // gzdbg << "fluid density: " << this->dataPtr->fluidDensity << std::endl;
-    // gzdbg << "Force: " << kBuoyForce << std::endl << std::endl;
+    gzdbg << bpnt.X() << "," << bpnt.Y() << "," << bpnt.Z() << std::endl;
+    gzdbg << "depth: " << depth << std::endl;
+    gzdbg << "dz: " << dz << std::endl;
+    gzdbg << "kDdz: " << kDdz << std::endl;
+    gzdbg << "deltaZ: " << deltaZ << std::endl;
+    gzdbg << "hull radius: " << this->dataPtr->hullRadius << std::endl;
+    gzdbg << "vehicle length: " << this->dataPtr->hullLength << std::endl;
+    gzdbg << "gravity z: " << -this->dataPtr->gravity.Z() << std::endl;
+    gzdbg << "fluid density: " << this->dataPtr->fluidDensity << std::endl;
+    gzdbg << "Force: " << kBuoyForce << std::endl << std::endl;
   }
 }
 

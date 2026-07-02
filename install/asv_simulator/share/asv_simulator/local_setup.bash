@@ -1,0 +1,1 @@
+/root/ros2_ws/src/asv_simulator/build/asv_simulator/ament_cmake_environment_hooks/local_setup.bash

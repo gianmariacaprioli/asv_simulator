@@ -1,0 +1,4 @@
+source;share/asv_simulator/local_setup.bash
+source;share/asv_simulator/local_setup.dsv
+source;share/asv_simulator/local_setup.sh
+source;share/asv_simulator/local_setup.zsh

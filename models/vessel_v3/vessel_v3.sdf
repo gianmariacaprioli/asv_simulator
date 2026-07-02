@@ -4,7 +4,7 @@
     <link name="base_link">
       <inertial>
         <mass>55000.0</mass>
-        <pose>0 0 -0.98 0 0 0</pose>
+        <pose>0 0 0.0 0 0 0</pose>
         <inertia>
           <ixx>146366.0</ixx> 
           <iyy>805620.0</iyy> 
@@ -21,7 +21,8 @@
       </collision>
 
       <visual name="visual_hull">
-        <pose>-2.5 0 0.78 0 0 0</pose>
+        <!-- <pose>-2.5 0 0.78 0 0 0</pose> -->
+        <pose>0.0 0 0.0 0 0 0</pose>
         <geometry>
           <mesh>
           <uri>model://vessel_v3/meshes/vessel_simplified.stl</uri>          
@@ -272,13 +273,18 @@
       name="asv::Surface">
       <link_name>base_link</link_name>
       <hull_length>13.11</hull_length>
-      <hull_radius>1.02</hull_radius>
+      <hull_radius>2.63</hull_radius>
       <fluid_density>1025</fluid_density>
       <points>
+        <point>6.5 0.0 0</point>
         <point>6.0 2.0 0</point>
         <point>6.0 -2.0 0</point>
         <point>-6.0 2.0 0</point>
-        <point>-6.0 -2.0 0</point>
+        <point> 0.0 2.5 0</point>
+        <point> 0.0 -2.5 0</point>
+        <point>-6.0 -2.0 0</point>    
+        <point>-6.5 0.0 0</point>
+
       </points>
       <wavefield>
         <topic>/wavefield/parameters</topic>

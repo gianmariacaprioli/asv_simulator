@@ -1,0 +1,25 @@
+[01m[K/root/ros2_ws/src/asv_simulator/plugins/Wavefield.cc:[m[K In constructor ‘[01m[Kasv::WavefieldPrivate::WavefieldPrivate()[m[K’:
+[01m[K/root/ros2_ws/src/asv_simulator/plugins/Wavefield.cc:137:18:[m[K [01;35m[Kwarning: [m[K‘[01m[Kasv::WavefieldPrivate::wavenumber[m[K’ will be initialized after [[01;35m[K-Wreorder[m[K]
+  137 |   public: double [01;35m[Kwavenumber[m[K;
+      |                  [01;35m[K^~~~~~~~~~[m[K
+[01m[K/root/ros2_ws/src/asv_simulator/plugins/Wavefield.cc:125:18:[m[K [01;35m[Kwarning: [m[K  ‘[01m[Kdouble asv::WavefieldPrivate::tau[m[K’ [[01;35m[K-Wreorder[m[K]
+  125 |   public: double [01;35m[Ktau[m[K;
+      |                  [01;35m[K^~~[m[K
+[01m[K/root/ros2_ws/src/asv_simulator/plugins/Wavefield.cc:50:11:[m[K [01;35m[Kwarning: [m[K  when initialized here [[01;35m[K-Wreorder[m[K]
+   50 |   public: [01;35m[KWavefieldPrivate[m[K():
+      |           [01;35m[K^~~~~~~~~~~~~~~~[m[K
+/root/ros2_ws/src/asv_simulator/plugins/Wavefield.cc: In instantiation of ‘[01m[Kasv::Wavefield::ComputeDepthDirectly(const Vector3d&, double, double)::<lambda(auto:24, auto:25, auto:26, auto:27&, auto:28&, auto:29&)> [with auto:24 = Eigen::Matrix<double, 2, 1>; auto:25 = Eigen::Matrix<double, 2, 1>; auto:26 = double; auto:27 = asv::Wavefield::ComputeDepthDirectly(const Vector3d&, double, double)::WaveParams; auto:28 = Eigen::Matrix<double, 2, 1>; auto:29 = Eigen::Matrix<double, 2, 2>][m[K’:
+[01m[K/root/ros2_ws/src/asv_simulator/plugins/Wavefield.cc:852:18:[m[K   required from ‘[01m[Kasv::Wavefield::ComputeDepthDirectly(const Vector3d&, double, double)::<lambda(auto:30&, auto:31, auto:32, auto:33, auto:34&, auto:35, auto:36)> [with auto:30 = asv::Wavefield::ComputeDepthDirectly(const Vector3d&, double, double)::<lambda(auto:24, auto:25, auto:26, auto:27&, auto:28&, auto:29&)>; auto:31 = Eigen::Matrix<double, 2, 1>; auto:32 = Eigen::Matrix<double, 2, 1>; auto:33 = double; auto:34 = asv::Wavefield::ComputeDepthDirectly(const Vector3d&, double, double)::WaveParams; auto:35 = double; auto:36 = double][m[K’
+[01m[K/root/ros2_ws/src/asv_simulator/plugins/Wavefield.cc:877:27:[m[K   required from here
+[01m[K/root/ros2_ws/src/asv_simulator/plugins/Wavefield.cc:809:26:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kint[m[K’ and ‘[01m[Kconst size_t[m[K’ {aka ‘[01m[Kconst long unsigned int[m[K’} [[01;35m[K-Wsign-compare[m[K]
+  809 |     for (auto&& i = 0; [01;35m[Ki < n[m[K; ++i) // NOLINT
+      |                        [01;35m[K~~^~~[m[K
+In file included from [01m[K/usr/include/c++/11/cassert:44[m[K,
+                 from [01m[K/root/ros2_ws/src/asv_simulator/plugins/PolyhedronVolume.cc:18[m[K:
+[01m[K/root/ros2_ws/src/asv_simulator/plugins/PolyhedronVolume.cc:[m[K In static member function ‘[01m[Kstatic asv::Polyhedron asv::Polyhedron::makeCylinder(double, double, int)[m[K’:
+[01m[K/root/ros2_ws/src/asv_simulator/plugins/PolyhedronVolume.cc:126:35:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kstd::vector<gz::math::v7::Vector3<double> >::size_type[m[K’ {aka ‘[01m[Klong unsigned int[m[K’} and ‘[01m[Kint[m[K’ [[01;35m[K-Wsign-compare[m[K]
+  126 |   assert([01;35m[Kcylinder.vertices.size() == 2 * _n + 2[m[K);
+      |          [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~[m[K
+[01m[K/root/ros2_ws/src/asv_simulator/plugins/PolyhedronVolume.cc:127:32:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kstd::vector<asv::Polyhedron::Face>::size_type[m[K’ {aka ‘[01m[Klong unsigned int[m[K’} and ‘[01m[Kint[m[K’ [[01;35m[K-Wsign-compare[m[K]
+  127 |   assert([01;35m[Kcylinder.faces.size() == 4 * _n[m[K);
+      |          [01;35m[K~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~[m[K

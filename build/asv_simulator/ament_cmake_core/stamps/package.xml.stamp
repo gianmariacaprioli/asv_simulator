@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>asv_simulator</name>
+  <version>0.0.0</version>
+  <description>TODO: Package description</description>
+  <maintainer email="caprioligianmaria@gmail.com">root</maintainer>
+  <license>TODO: License declaration</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>rclpy</depend>
+  <depend>ros_gz_sim</depend>
+  <depend>ros_gz_bridge</depend>
+  <depend>geometry_msgs</depend>
+  <depend>gz-transport13</depend>
+  <depend>gz-msgs10</depend>
+  <depend>gz-common5</depend>
+  <depend>gz-fuel_tools9</depend>
+  <depend>gz-math7</depend>
+  <depend>gz-plugin2</depend>
+  <depend>gz-rendering8</depend>
+  <depend>gz-sensors8</depend>
+  <depend>gz-sim8</depend>
+  <depend>gz-utils2</depend>
+  <depend>sdformat14</depend>
+  <depend>eigen</depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
