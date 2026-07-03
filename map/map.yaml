@@ -1,6 +1,6 @@
 image: occupancy_grid_513.png
 resolution: 5.5
-origin: [0.0, 0.0, 0.0]
+origin: [-25.65, -25.65, 0.0]
 negate: 0
 occupied_thresh: 0.65
 free_thresh: 0.196

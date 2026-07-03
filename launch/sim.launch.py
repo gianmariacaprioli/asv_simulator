@@ -2,7 +2,7 @@ import os
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, AppendEnvironmentVariable
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch_ros.actions import Node
+from launch_ros.actions import Node, LifecycleNode
 from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
@@ -12,6 +12,8 @@ def generate_launch_description():
     world_file = os.path.join(pkg_asv_sim, 'worlds', 'ocean_world.sdf')
     # urdf_path = os.path.join(pkg_asv_sim, 'urdf', 'vessel_v2.urdf')
     rviz_config = os.path.join(pkg_asv_sim, 'configs', 'vessel_viz.rviz')
+
+    map_yaml_file = os.path.join(pkg_asv_sim, 'map', 'map.yaml')
 
     # with open(urdf_path, 'r') as infp:
     #     robot_description = infp.read()
@@ -69,6 +71,44 @@ def generate_launch_description():
     #     parameters=[{'robot_description': robot_description}],
     # )
 
+        # 3. Map Server (Lifecycle Node)
+    map_server = LifecycleNode(
+        package='nav2_map_server',
+        executable='map_server',
+        namespace ='',
+        name='map_server',
+        output='screen',
+        parameters=[
+            {'yaml_filename': map_yaml_file},
+            {'frame_id': 'map'},
+            {'topic_name': 'map'},
+            {'use_sim_time': True}
+        ],
+    )
+
+    # 4. Lifecycle Manager (Attiva automaticamente il map_server)
+    lifecycle_manager = Node(
+        package='nav2_lifecycle_manager',
+        executable='lifecycle_manager',
+        name='lifecycle_manager',
+        output='screen',
+        parameters=[
+            {'use_sim_time': True},
+            {'autostart': True},
+            {'node_names': ['map_server']}
+        ]
+    )
+
+        # TF: map -> ocean_world
+    # Questa allinea l'origine della mappa (0,0) con l'origine del mondo Gazebo (0,0)
+    # Se la mappa è spostata, modifica i primi 3 valori (x, y, z)
+    tf_map_to_ocean = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='tf_map_to_ocean',
+        arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'map', 'ocean_world']
+    )
+
     tf_camera = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
@@ -112,6 +152,9 @@ def generate_launch_description():
         set_model_path,
         gz_sim,
         bridge,
+        map_server,
+        lifecycle_manager,
+        tf_map_to_ocean,
         # robot_state_publisher,
         tf_camera,
         tf_sensors,
