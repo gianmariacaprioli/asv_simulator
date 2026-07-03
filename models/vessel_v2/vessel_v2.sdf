@@ -47,7 +47,7 @@
       </visual>
     </link>
 
-  <link name="left_propeller">
+    <link name="left_propeller">
       <pose>-6.6 -1.0 -0.8 0 0 0</pose> 
       <inertial>
         <mass>0.5</mass>
@@ -97,7 +97,7 @@
       </visual>
     </link>
 
-  <joint name="left_engine_joint" type="revolute">
+    <joint name="left_engine_joint" type="revolute">
       <parent>base_link</parent>
       <child>left_propeller</child>
       <axis>
@@ -111,8 +111,8 @@
         </limit>
 
           <dynamics>
-              <damping>0</damping>
-              <friction>0</friction>
+              <damping>0.0</damping>
+              <friction>0.0</friction>
         </dynamics>
 
       </axis>
@@ -132,8 +132,8 @@
         </limit>
 
         <dynamics>
-            <damping>0</damping>
-            <friction>0</friction>
+            <damping>0.0</damping>
+            <friction>0.0</friction>
         </dynamics>
 
       </axis>
@@ -228,24 +228,26 @@
         <pose>0 0 0 0 0 0</pose> 
         <always_on>1</always_on>
         <visualize>true</visualize> 
-        <update_rate>10</update_rate>    
+        <update_rate>5</update_rate>    
         <topic>/vessel_v2/sonar</topic>
         <lidar>
           <scan>
             <horizontal>
               <samples>32</samples>
               <resolution>1</resolution>
-              <min_angle>-0.261</min_angle> <max_angle>0.261</max_angle>
+              <min_angle>-0.349</min_angle> 
+              <max_angle>0.349</max_angle>
             </horizontal>
-            <vertical> <samples>32</samples>
+            <vertical> 
+              <samples>32</samples>
               <resolution>1</resolution>
-              <min_angle>-0.261</min_angle> 
-              <max_angle>0.261</max_angle>
+              <min_angle>-0.349</min_angle> 
+              <max_angle>0.349</max_angle>
             </vertical>
           </scan>
           <range>
             <min>0.5</min>
-            <max>50.0</max> 
+            <max>500.0</max> 
             <resolution>0.1</resolution>
           </range>
         </lidar>
@@ -267,9 +269,10 @@
       <link_name>base_link</link_name>
       <!-- SURGE (X) -->
       <!-- <xU>0.0</xU>
-      <xUabsU>0.0</xUabsU> -->
-      <xU>-500.0</xU>
-      <xUabsU>-50.0</xUabsU>
+      <xUabsU>300.0</xUabsU>  reale
+      Inserendo -1850.0, fai in modo che alla velocità limite di circa 5 m/s, la resistenza quadratica generi una forza frenante (1850⋅5^2 ≈46.250 N) che, sommata allo smorzamento lineare, bilancia esattamente i 60.000 N (60 kN) di spinta massima delle tue due eliche.-->
+      <xU>-2750.0</xU>
+      <xUabsU>-1500.0</xUabsU>
       <!-- SWAY (Y) -->
       <!-- <yV>0.0</yV>
       <yVabsV>0.0</yVabsV> -->
@@ -304,19 +307,23 @@
     </plugin>
 
     <plugin filename="gz-sim-thruster-system" name="gz::sim::systems::Thruster">
-      <!-- <namespace>vessel_v2</namespace> -->
+      <namespace>vessel_v2</namespace>
       <joint_name>left_engine_joint</joint_name>
-      <thrust_coefficient>0.00005</thrust_coefficient>
+      <max_thrust_cmd>30000.0</max_thrust_cmd>
+      <min_thrust_cmd>-20000.0</min_thrust_cmd>
+      <thrust_coefficient>0.0126</thrust_coefficient>
       <velocity_control>false</velocity_control>
       <fluid_density>1025.0</fluid_density>
       <propeller_diameter>1.2</propeller_diameter>
     </plugin>
 
     <plugin filename="gz-sim-thruster-system" name="gz::sim::systems::Thruster">
-      <!-- <namespace>vessel_v2</namespace> -->
+      <namespace>vessel_v2</namespace>
       <joint_name>right_engine_joint</joint_name>
+      <max_thrust_cmd>30000.0</max_thrust_cmd>
+      <min_thrust_cmd>-20000.0</min_thrust_cmd>
       <velocity_control>false</velocity_control>
-      <thrust_coefficient>0.00005</thrust_coefficient>
+      <thrust_coefficient>0.0126</thrust_coefficient>
       <fluid_density>1025.0</fluid_density>
       <propeller_diameter>1.2</propeller_diameter>
     </plugin>
