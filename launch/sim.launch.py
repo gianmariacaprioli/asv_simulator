@@ -47,7 +47,8 @@ def generate_launch_description():
             '/vessel_v2/camera@sensor_msgs/msg/Image[gz.msgs.Image',
             '/vessel_v2/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
 
-            '/vessel_v2/lidar/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
+            # '/vessel_v2/lidar/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
+            '/vessel_v2/lidar@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan',
             '/vessel_v2/sonar/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
 
             '/vessel_v2/gps/fix@sensor_msgs/msg/NavSatFix[gz.msgs.NavSat'
@@ -101,12 +102,12 @@ def generate_launch_description():
 
         # TF: map -> ocean_world
     # Questa allinea l'origine della mappa (0,0) con l'origine del mondo Gazebo (0,0)
-    # Se la mappa è spostata, modifica i primi 3 valori (x, y, z)
+    # Invertiamo l'offset dell'origine della mappa: [-25.65, -25.65, -0.25] -> [25.65, 25.65, 0.25]
     tf_map_to_ocean = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
         name='tf_map_to_ocean',
-        arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'map', 'ocean_world']
+        arguments=['300.00', '600.00', '0.0', '-1.309', '0', '0.0', 'map', 'ocean_world']
     )
 
     tf_camera = Node(
@@ -152,9 +153,9 @@ def generate_launch_description():
         set_model_path,
         gz_sim,
         bridge,
-        map_server,
-        lifecycle_manager,
-        tf_map_to_ocean,
+        # map_server,
+        # lifecycle_manager,
+        # tf_map_to_ocean,
         # robot_state_publisher,
         tf_camera,
         tf_sensors,

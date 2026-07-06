@@ -1,0 +1,23 @@
+slam_toolbox:
+  ros__parameters:
+    use_sim_time: true
+    mode: mapping
+    map_frame: map
+    # If there is no separate odometry topic/frame, use the robot base frame.
+    # slam_toolbox still requires an odom_frame parameter, but this can be
+    # the same frame as base_frame when only scan matching is available.
+    odom_frame: vessel_v2
+
+    base_frame: vessel_v2
+    # slam_toolbox expects LaserScan by default on scan_topic.
+    # If your sensor publishes PointCloud2 on /vessel_v2/lidar/points, the map
+    # will not update unless you convert that PointCloud2 to LaserScan.
+    scan_topic: /vessel_v2/lidar
+
+    # Mapping parameters (tune as needed)
+    max_laser_range: 50.0
+    min_laser_range: 2.0
+    throttle_scans: 2
+    resolution: 0.5
+    signature_publish_period: 5.0
+    save_map_on_exit: false

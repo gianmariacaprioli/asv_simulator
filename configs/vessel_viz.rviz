@@ -4,10 +4,6 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
-        - /Global Options1
-        - /Status1
-        - /Map1
-        - /Map1/Status1
         - /Map1/Topic1
       Splitter Ratio: 0.5
     Tree Height: 735
@@ -22,6 +18,7 @@ Panels:
   - Class: rviz_common/Views
     Expanded:
       - /Current View1
+      - /Current View1/Focal Point1
     Name: Views
     Splitter Ratio: 0.5
   - Class: rviz_common/Time
@@ -55,8 +52,6 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        map:
-          Value: true
         ocean_world:
           Value: true
         vessel_v2:
@@ -87,9 +82,8 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        map:
-          ocean_world:
-            {}
+        ocean_world:
+          {}
         vessel_v2:
           vessel_v2/base_link:
             {}
@@ -154,6 +148,7 @@ Visualization Manager:
       Visibility:
         Grid: true
         LIDAR: true
+        LaserScan: true
         Map: true
         RobotModel: true
         SONAR: true
@@ -189,8 +184,8 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: false
       Autocompute Value Bounds:
-        Max Value: -15.481213569641113
-        Min Value: -16.91313934326172
+        Max Value: -15.703492164611816
+        Min Value: -17.1343994140625
         Value: true
       Axis: Z
       Channel Name: intensity
@@ -232,7 +227,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: Intensity
       Decay Time: 0
-      Enabled: true
+      Enabled: false
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 0
@@ -250,10 +245,10 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /vessel_v2/lidar/points
+        Value: /vessel_v2/lidar
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
+      Value: false
     - Alpha: 0.699999988079071
       Class: rviz_default_plugins/Map
       Color Scheme: map
@@ -275,10 +270,44 @@ Visualization Manager:
         Value: /map_updates
       Use Timestamp: false
       Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz_default_plugins/LaserScan
+      Color: 255; 255; 255
+      Color Transformer: Intensity
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 0
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: LaserScan
+      Position Transformer: XYZ
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.009999999776482582
+      Style: Points
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /vessel_v2/lidar
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: map
+    Fixed Frame: vessel_v2
     Frame Rate: 30
   Name: root
   Tools:
@@ -321,25 +350,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 16.548992156982422
+      Distance: 29.6500301361084
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -3.8870322704315186
-        Y: 7.90261697769165
-        Z: 9.023981094360352
+        X: 1.3223031759262085
+        Y: 1.4632562398910522
+        Z: -1.2145377397537231
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.6253983378410339
-      Target Frame: <Fixed Frame>
+      Pitch: 0.31499987840652466
+      Target Frame: vessel_v2
       Value: Orbit (rviz)
-      Yaw: 2.7153987884521484
+      Yaw: 2.375000238418579
     Saved: ~
 Window Geometry:
   Camera:

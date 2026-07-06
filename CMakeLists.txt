@@ -35,6 +35,7 @@ install(DIRECTORY
   models
   urdf
   configs
+  map
   worlds
   include
   scripts/virtual_sonar.py
