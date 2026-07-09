@@ -27,6 +27,7 @@ endif()
 
 install(PROGRAMS
   scripts/virtual_sonar.py
+  scripts/gazebo_odom.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
@@ -38,7 +39,8 @@ install(DIRECTORY
   map
   worlds
   include
-  scripts/virtual_sonar.py
+  # scripts/virtual_sonar.py
+  # scripts/gazebo_odom.py
   DESTINATION share/${PROJECT_NAME}
 )
 

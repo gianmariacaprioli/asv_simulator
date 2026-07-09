@@ -10,13 +10,12 @@ def generate_launch_description():
     pkg_asv_sim = get_package_share_directory('asv_simulator')
     
     world_file = os.path.join(pkg_asv_sim, 'worlds', 'ocean_world.sdf')
-    # urdf_path = os.path.join(pkg_asv_sim, 'urdf', 'vessel_v2.urdf')
     rviz_config = os.path.join(pkg_asv_sim, 'configs', 'vessel_viz.rviz')
-
     map_yaml_file = os.path.join(pkg_asv_sim, 'map', 'map.yaml')
+    urdf_path = os.path.join(pkg_asv_sim, "urdf", "vessel_v2.urdf")
 
-    # with open(urdf_path, 'r') as infp:
-    #     robot_description = infp.read()
+    with open(urdf_path, "r") as f:
+        robot_description = f.read()
     
     set_model_path = AppendEnvironmentVariable(
         'GZ_SIM_RESOURCE_PATH',
@@ -38,8 +37,11 @@ def generate_launch_description():
         arguments=[
             '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
             
-            # IL TRUCCO PER LE TF DINAMICHE: Convertiamo le pose di Gazebo in TF per RViz
-            '/model/vessel_v2/pose@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
+            # '/model/vessel_v2/pose@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
+            '/model/vessel_v2/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry',
+            
+            # --- AGGIUNTO: Porta i joint_states da Gazebo a ROS ---
+            '/world/ocean_world/model/vessel_v2/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model',
             
             '/model/vessel_v2/joint/left_engine_joint/cmd_thrust@std_msgs/msg/Float64]gz.msgs.Double',
             '/model/vessel_v2/joint/right_engine_joint/cmd_thrust@std_msgs/msg/Float64]gz.msgs.Double',
@@ -47,15 +49,16 @@ def generate_launch_description():
             '/vessel_v2/camera@sensor_msgs/msg/Image[gz.msgs.Image',
             '/vessel_v2/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
 
-            # '/vessel_v2/lidar/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
-            '/vessel_v2/lidar@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan',
+            # '/vessel_v2/lidar@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan',
+            '/vessel_v2/lidar/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
             '/vessel_v2/sonar/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
 
             '/vessel_v2/gps/fix@sensor_msgs/msg/NavSatFix[gz.msgs.NavSat'
         ],
-        # Mappiamo il topic di Gazebo sul topic standard /tf di ROS 2
         remappings=[
-            ('/model/vessel_v2/pose', '/tf')
+            # ('/model/vessel_v2/pose', '/tf'),
+            # --- AGGIUNTO: Rimappa il topic sul default di ROS 2 ---
+            ('/world/ocean_world/model/vessel_v2/joint_state', '/joint_states')
         ],
         output='screen'
     )
@@ -110,56 +113,109 @@ def generate_launch_description():
         arguments=['300.00', '600.00', '0.0', '-1.309', '0', '0.0', 'map', 'ocean_world']
     )
 
+    # 4. Robot State Publisher (Legge l'URDF)
+    robot_state_publisher = Node(
+        package="robot_state_publisher",
+        executable="robot_state_publisher",
+        output="screen",
+        parameters=[
+            {
+                "robot_description": robot_description,
+                "use_sim_time": True,
+            }
+        ],
+    )
+
+    # 5. Odometria custom
+    odom_tf = Node(
+        package='asv_simulator',
+        executable='gazebo_odom.py',
+        output='screen'
+    )
+
+    tf_lidar = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='tf_lidar',
+        arguments=['0.0', '0.0', '0.5', '0.0', '0.0', '0.0', 'lidar_link', 'vessel_v2/lidar_link/gpu_lidar']
+    )
+
     tf_camera = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
         name='tf_camera',
-        arguments=['6.0', '0.0', '2.0', '0.0', '0.0', '0.0', 'vessel_v2', 'vessel_v2/sensors_link/camera']
+        arguments=['0.0', '0.0', '0.2', '0.0', '0.0', '0.0', 'camera_link', 'vessel_v2/camera_link/camera']
     )
 
-    tf_sensors = Node(
+    tf_camera_optical = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
-        name='tf_sensors',
-        arguments=['6.0', '0.0', '1.8', '0.0', '0.0', '0.0', 'vessel_v2', 'vessel_v2/sensors_link/gpu_lidar']
+        name='tf_camera_optical',
+        arguments=['0.0', '0.0', '0.0', '-1.5708', '0.0', '-1.5708', 'vessel_v2/camera_link/camera', 'vessel_v2/camera_link/camera_optical']
     )
 
-    # Nodo 4: TF Statica per il Sonar (inclinato in basso)
     tf_sonar = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
         name='tf_sonar',
-        arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'vessel_v2/sonar_link', 'vessel_v2/sonar_link/sonar']
+        arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'sonar_link', 'vessel_v2/sonar_link/sonar']
     )
 
-    # Nodo 5: TF Statica per il GPS
     tf_gps = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
         name='tf_gps',
-        arguments=['-3.0', '0.0', '2.5', '0.0', '0.0', '0.0', 'vessel_v2', 'vessel_v2/gps_link/gps_sensor']
+        arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'gps_link', 'vessel_v2/gps_link/gps_sensor']
     )
 
+    pointcloud_to_laserscan_node = Node(
+        package='pointcloud_to_laserscan',
+        executable='pointcloud_to_laserscan_node',
+        name='pointcloud_to_laserscan',
+        remappings=[
+            ('cloud_in', '/vessel_v2/lidar/points'),
+            ('scan', '/vessel_v2/lidar_2d') # Il nuovo topic pulito per lo SLAM
+        ],
+        parameters=[{
+            'target_frame': 'lidar_link',
+            'transform_tolerance': 0.01,
+            # Se il Lidar è a Z=1.8, l'acqua è a -1.8 rispetto a lui. 
+            # Tagliamo a -1.0 per filtrare via il mare in modo sicuro!
+            'min_height': -0.2,  # Prendi solo 20 cm sotto il laser
+            'max_height': 3.0,   # Prendi solo 20 cm sopra il laser
+            'angle_increment': 0.0087266, # mezzo grado di risoluzione (alleggerisce il carico) 
+            'angle_min': -1.5708,  # -90 gradi
+            'angle_max': 1.5708,   # +90 gradi
+            'scan_time': 0.1,
+            'range_min': 0.5,
+            'range_max': 50.0,
+            'use_inf': True,
+        }],
+        output='screen'
+    )
     # Nodo RViz2
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
         name='rviz2',
         arguments=['-d', rviz_config],
+        parameters=[{'use_sim_time': True}], # 
         output='screen'
     )
-    
+   
     return LaunchDescription([
         set_model_path,
         gz_sim,
         bridge,
-        # map_server,
         # lifecycle_manager,
         # tf_map_to_ocean,
-        # robot_state_publisher,
-        tf_camera,
-        tf_sensors,
-        tf_sonar,
+        robot_state_publisher,
+        odom_tf,
+        tf_lidar,            # Attivato
+        tf_camera,           # Attivato
+        tf_camera_optical,   # Attivato
+        tf_sonar,            # Attivato
         tf_gps,
+        pointcloud_to_laserscan_node,
         rviz_node,
     ])
