@@ -87,6 +87,71 @@
       </link>
     </model> -->
 
+    <!-- Waypoint 1 (X: 51.36m, Y: 31.85m) -->
+    <model name="waypoint_1">
+      <static>true</static>
+      <pose>51.36 31.85 4.0 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>2.0</radius> <!-- Raggio del cerchio/cilindro (4m di diametro) -->
+              <length>0.2</length> <!-- Spessore del cerchio -->
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>1.0 0.0 0.0 1.0</ambient>
+            <diffuse>1.0 0.0 0.0 1.0</diffuse>
+            <specular>0.2 0.2 0.2 1.0</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Waypoint 2 (X: 185.57m, Y: 109.52m) -->
+    <model name="waypoint_2">
+      <static>true</static>
+      <pose>185.57 109.52 4.0 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>2.0</radius> <!-- Raggio del cerchio/cilindro (4m di diametro) -->
+              <length>0.2</length> <!-- Spessore del cerchio -->
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>1.0 0.0 0.0 1.0</ambient>
+            <diffuse>1.0 0.0 0.0 1.0</diffuse>
+            <specular>0.2 0.2 0.2 1.0</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+<!-- Waypoint 3 (Posizionato a metà strada tra WP2 e il vecchio WP3) -->
+    <model name="waypoint_3">
+      <static>true</static>
+      <pose>242.81 -29.18 4.0 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>2.0</radius> <!-- Raggio 2m (diametro 4m) -->
+              <length>0.2</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>1.0 0.0 0.0 1.0</ambient> <!-- Rosso OPACO -->
+            <diffuse>1.0 0.0 0.0 1.0</diffuse>
+            <specular>0.2 0.2 0.2 1.0</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+
+
     <model name="depths">
       <static>true</static>
       <pose>0 0 -20 0 0 0</pose> 
@@ -133,3 +198,23 @@
 
   </world>
 </sdf>
+
+    <!-- <model name="waypoint_3">
+      <static>true</static>
+      <pose>300.05 -167.89 4.0 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>2.0</radius> <!-- Raggio 2m (diametro 4m) -->
+              <length>0.2</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>1.0 0.0 0.0 1.0</ambient> <!-- Rosso OPACO -->
+            <diffuse>1.0 0.0 0.0 1.0</diffuse>
+            <specular>0.2 0.2 0.2 1.0</specular>
+          </material>
+        </visual>
+      </link>
+    </model> -->

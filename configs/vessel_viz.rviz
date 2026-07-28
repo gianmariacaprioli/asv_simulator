@@ -66,8 +66,6 @@ Visualization Manager:
           Value: true
         lidar_link:
           Value: true
-        map:
-          Value: true
         odom:
           Value: true
         right_propeller:
@@ -90,26 +88,25 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        map:
-          odom:
-            base_link:
-              camera_link:
-                vessel_v2/camera_link/camera:
-                  vessel_v2/camera_link/camera_optical:
-                    {}
-              gps_link:
-                vessel_v2/gps_link/gps_sensor:
+        odom:
+          base_link:
+            camera_link:
+              vessel_v2/camera_link/camera:
+                vessel_v2/camera_link/camera_optical:
                   {}
-              left_propeller:
+            gps_link:
+              vessel_v2/gps_link/gps_sensor:
                 {}
-              lidar_link:
-                vessel_v2/lidar_link/gpu_lidar:
-                  {}
-              right_propeller:
+            left_propeller:
+              {}
+            lidar_link:
+              vessel_v2/lidar_link/gpu_lidar:
                 {}
-              sonar_link:
-                vessel_v2/sonar_link/sonar:
-                  {}
+            right_propeller:
+              {}
+            sonar_link:
+              vessel_v2/sonar_link/sonar:
+                {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -190,8 +187,8 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: false
       Autocompute Value Bounds:
-        Max Value: -2.5570716857910156
-        Min Value: -17.90583038330078
+        Max Value: -2.5
+        Min Value: -17.12564468383789
         Value: true
       Axis: Z
       Channel Name: intensity
@@ -313,7 +310,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: map
+    Fixed Frame: base_link
     Frame Rate: 30
   Name: root
   Tools:
@@ -356,7 +353,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 58.09385299682617
+      Distance: 38.85316848754883
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
