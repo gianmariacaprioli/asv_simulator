@@ -5,6 +5,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node, LifecycleNode
 from ament_index_python.packages import get_package_share_directory
 
+
 def generate_launch_description():
     pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim')
     pkg_asv_sim = get_package_share_directory('asv_simulator')
@@ -14,6 +15,85 @@ def generate_launch_description():
     map_yaml_file = os.path.join(pkg_asv_sim, 'map', 'map.yaml')
     urdf_path = os.path.join(pkg_asv_sim, "urdf", "vessel_v2.urdf")
 
+    # -------------------------------------------------------------------------
+    # ROBOT CONFIGURATION
+    #
+    # Questa e' la sola lista da estendere quando aggiungerai nuovi UAV / USV.
+    # Per ora manteniamo i frame gia' usati dalla simulazione corrente:
+    #   vessel_v2 -> odom
+    #   x500      -> x500/odom
+    # -------------------------------------------------------------------------
+    robots = [
+        {
+            'name': 'usv_0',
+            'odom_topic': '/model/vessel_v2/odometry',
+            'odom_frame': 'odom',
+        },
+        {
+            'name': 'uav_0',
+            'odom_topic': '/model/x500/odometry',
+            'odom_frame': 'x500/odom',
+        },
+    ]
+
+    # -------------------------------------------------------------------------
+    # GENERIC ODOMETRY -> TF BROADCASTERS
+    #
+    # Viene creata una istanza per ogni robot. Il nodo generico legge
+    # frame_id e child_frame_id direttamente dal messaggio nav_msgs/Odometry.
+    # Questo sostituisce gazebo_odom.py e gazebo_odom_x500.py.
+    # -------------------------------------------------------------------------
+    odometry_tf_nodes = []
+
+    for robot in robots:
+        odometry_tf_nodes.append(
+            Node(
+                package='asv_simulator',
+                executable='odometry_tf_broadcaster.py',
+                name=f'{robot["name"]}_odometry_tf',
+                output='screen',
+                parameters=[
+                    {
+                        'odom_topic': robot['odom_topic'],
+                        'use_sim_time': True,
+                    }
+                ],
+            )
+        )
+
+    # -------------------------------------------------------------------------
+    # GLOBAL SIMULATION FRAME
+    #
+    # Durante la fase Gazebo senza SLAM crea un'origine comune:
+    #
+    #                         ocean_world
+    #                        /           \
+    #                     odom         x500/odom
+    #
+    # Gli odom correnti sono allineati al world Gazebo, quindi queste
+    # trasformazioni sono identita'.
+    #
+    # IMPORTANTE PER SLAM:
+    # quando SLAM/localization pubblichera' map -> <robot>/odom, questo nodo
+    # dovra' essere disabilitato per evitare due parent dello stesso odom.
+    # -------------------------------------------------------------------------
+    global_frame_manager = Node(
+        package='asv_simulator',
+        executable='global_frame_manager.py',
+        name='global_frame_manager',
+        output='screen',
+        parameters=[
+            {
+                'global_frame': 'ocean_world',
+                'odom_frames': [
+                    robot['odom_frame']
+                    for robot in robots
+                ],
+                'use_sim_time': True,
+            }
+        ],
+    )
+
     with open(urdf_path, "r") as f:
         robot_description = f.read()
     
@@ -21,6 +101,15 @@ def generate_launch_description():
         'GZ_SIM_RESOURCE_PATH',
         os.path.join(pkg_asv_sim, 'models')
     )
+
+    x500_urdf_path = os.path.join(
+        pkg_asv_sim,
+        "urdf",
+        "x500.urdf"
+    )
+
+    with open(x500_urdf_path, "r") as f:
+        x500_robot_description = f.read()
     
     # Nodo 1: Avvia Gazebo Harmonic
     gz_sim = IncludeLaunchDescription(
@@ -53,12 +142,19 @@ def generate_launch_description():
             '/vessel_v2/lidar/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
             '/vessel_v2/sonar/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
 
-            '/vessel_v2/gps/fix@sensor_msgs/msg/NavSatFix[gz.msgs.NavSat'
+            '/vessel_v2/gps/fix@sensor_msgs/msg/NavSatFix[gz.msgs.NavSat',
+
+            # UAV BRIDGE
+            '/model/x500/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry',
+            '/x500/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist',
+            '/x500/enable@std_msgs/msg/Bool]gz.msgs.Boolean',
+            '/world/ocean_world/model/x500/link/base_link/sensor/navsat_sensor/navsat@sensor_msgs/msg/NavSatFix[gz.msgs.NavSat',
         ],
         remappings=[
             # ('/model/vessel_v2/pose', '/tf'),
             # --- AGGIUNTO: Rimappa il topic sul default di ROS 2 ---
-            ('/world/ocean_world/model/vessel_v2/joint_state', '/joint_states')
+            ('/world/ocean_world/model/vessel_v2/joint_state', '/joint_states'),    
+            ('/world/ocean_world/model/x500/link/base_link/sensor/navsat_sensor/navsat','/x500/gps/fix'),
         ],
         output='screen'
     )
@@ -75,7 +171,7 @@ def generate_launch_description():
     #     parameters=[{'robot_description': robot_description}],
     # )
 
-        # 3. Map Server (Lifecycle Node)
+    # 3. Map Server (Lifecycle Node)
     map_server = LifecycleNode(
         package='nav2_map_server',
         executable='map_server',
@@ -103,15 +199,46 @@ def generate_launch_description():
         ]
     )
 
-        # TF: map -> ocean_world
+    # TF: map -> ocean_world
     # Questa allinea l'origine della mappa (0,0) con l'origine del mondo Gazebo (0,0)
     # Invertiamo l'offset dell'origine della mappa: [-25.65, -25.65, -0.25] -> [25.65, 25.65, 0.25]
-    tf_map_to_ocean = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        name='tf_map_to_ocean',
-        arguments=['300.00', '600.00', '0.0', '-1.309', '0', '0.0', 'map', 'ocean_world']
-    )
+    # tf_map_to_ocean = Node(
+    #     package='tf2_ros',
+    #     executable='static_transform_publisher',
+    #     name='tf_map_to_ocean',
+    #     arguments=['300.00', '600.00', '0.0', '-1.309', '0', '0.0', 'map', 'ocean_world']
+    # )
+
+    # -------------------------------------------------------------------------
+    # VECCHIE TF GLOBALI STATICHE - SOSTITUITE DA global_frame_manager.py
+    #
+    # NON lanciarle insieme al global_frame_manager, altrimenti avremmo piu'
+    # publisher per le stesse trasformazioni.
+    # -------------------------------------------------------------------------
+
+    # tf_ocean_to_odom = Node(
+    #     package='tf2_ros',
+    #     executable='static_transform_publisher',
+    #     name='tf_ocean_to_odom',
+    #     arguments=[
+    #         '0', '0', '0',
+    #         '0', '0', '0',
+    #         'ocean_world',
+    #         'odom'
+    #     ],
+    # )
+
+    # tf_ocean_to_x500_odom = Node(
+    #     package='tf2_ros',
+    #     executable='static_transform_publisher',
+    #     name='tf_ocean_to_x500_odom',
+    #     arguments=[
+    #         '0', '0', '0',
+    #         '0', '0', '0',
+    #         'ocean_world',
+    #         'x500/odom'
+    #     ],
+    # )
 
     # 4. Robot State Publisher (Legge l'URDF)
     robot_state_publisher = Node(
@@ -126,12 +253,42 @@ def generate_launch_description():
         ],
     )
 
-    # 5. Odometria custom
-    odom_tf = Node(
-        package='asv_simulator',
-        executable='gazebo_odom.py',
-        output='screen'
+    x500_robot_state_publisher = Node(
+        package="robot_state_publisher",
+        executable="robot_state_publisher",
+        namespace="x500",
+        name="robot_state_publisher",
+        output="screen",
+        parameters=[
+            {
+                "robot_description": x500_robot_description,
+                "use_sim_time": True,
+            }
+        ],
     )
+
+    # 5. Odometria custom
+    #
+    # Questi due nodi sono stati sostituiti dal broadcaster generico
+    # odometry_tf_broadcaster.py creato automaticamente per ogni robot
+    # dalla lista "robots" all'inizio del file.
+    #
+    # NON vanno lanciati insieme ai nuovi nodi, altrimenti avremmo piu'
+    # publisher per:
+    #   odom -> base_link
+    #   x500/odom -> x500/base_link
+
+    # odom_tf = Node(
+    #     package='asv_simulator',
+    #     executable='gazebo_odom.py',
+    #     output='screen'
+    # )
+
+    # x500_odom_tf = Node(
+    #     package='asv_simulator',
+    #     executable='gazebo_odom_x500.py',
+    #     output='screen',
+    # )
 
     tf_lidar = Node(
         package='tf2_ros',
@@ -193,6 +350,7 @@ def generate_launch_description():
         }],
         output='screen'
     )
+
     # Nodo RViz2
     rviz_node = Node(
         package='rviz2',
@@ -202,15 +360,40 @@ def generate_launch_description():
         parameters=[{'use_sim_time': True}], # 
         output='screen'
     )
+
+    # -------------------------------------------------------------------------
+    # VECCHIA TF STATICA X500 - NON USARE
+    #
+    # x500/base_link si muove rispetto a x500/odom, quindi questa relazione
+    # NON puo' essere statica. Ora viene pubblicata dinamicamente da
+    # odometry_tf_broadcaster.py usando /model/x500/odometry.
+    # -------------------------------------------------------------------------
+
+    # x500_odom_tf = Node(
+    #     package='tf2_ros',
+    #     executable='static_transform_publisher',
+    #     name='x500_odom_tf',
+    #     arguments=['0', '0', '0', '0', '0', '0', 'x500/odom', 'x500/base_link']
+    # )
    
     return LaunchDescription([
         set_model_path,
         gz_sim,
         bridge,
+
+        # Map server / SLAM restano disabilitati per ora.
+        # map_server,
         # lifecycle_manager,
-        # tf_map_to_ocean,
+
+        # Un solo nodo gestisce il riferimento globale comune della simulazione.
+        global_frame_manager,
+
+        # Un broadcaster TF dinamico per ogni robot presente nella lista "robots".
+        *odometry_tf_nodes,
+
         robot_state_publisher,
-        odom_tf,
+        x500_robot_state_publisher,
+
         tf_lidar,            # Attivato
         tf_camera,           # Attivato
         tf_camera_optical,   # Attivato

@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<robot name="x500">
+
+  <!-- ========================================================= -->
+  <!-- BASE                                                      -->
+  <!-- ========================================================= -->
+
+  <link name="x500/base_link">
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="2.0"/>
+      <inertia
+        ixx="0.0216666667"
+        ixy="0"
+        ixz="0"
+        iyy="0.0216666667"
+        iyz="0"
+        izz="0.04"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh
+          filename="package://asv_simulator/models/x500_base/meshes/NXP-HGD-CF.dae"
+          scale="1 1 1"/>
+      </geometry>
+    </visual>
+
+  </link>
+
+
+  <!-- ========================================================= -->
+  <!-- ROTOR 0                                                   -->
+  <!-- ========================================================= -->
+
+  <link name="x500/rotor_0">
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh
+          filename="package://asv_simulator/models/x500_base/meshes/1345_prop_ccw.stl"
+          scale="1 1 1"/>
+      </geometry>
+    </visual>
+
+  </link>
+
+  <joint name="x500/rotor_0_joint" type="fixed">
+
+    <origin xyz="0.174 -0.174 0.06" rpy="0 0 0"/>
+
+    <parent link="x500/base_link"/>
+    <child link="x500/rotor_0"/>
+
+  </joint>
+
+
+  <!-- ========================================================= -->
+  <!-- ROTOR 1                                                   -->
+  <!-- ========================================================= -->
+
+  <link name="x500/rotor_1">
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh
+          filename="package://asv_simulator/models/x500_base/meshes/1345_prop_ccw.stl"
+          scale="1 1 1"/>
+      </geometry>
+    </visual>
+
+  </link>
+
+  <joint name="x500/rotor_1_joint" type="fixed">
+
+    <origin xyz="-0.174 0.174 0.06" rpy="0 0 0"/>
+
+    <parent link="x500/base_link"/>
+    <child link="x500/rotor_1"/>
+
+  </joint>
+
+
+  <!-- ========================================================= -->
+  <!-- ROTOR 2                                                   -->
+  <!-- ========================================================= -->
+
+  <link name="x500/rotor_2">
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh
+          filename="package://asv_simulator/models/x500_base/meshes/1345_prop_cw.stl"
+          scale="1 1 1"/>
+      </geometry>
+    </visual>
+
+  </link>
+
+  <joint name="x500/rotor_2_joint" type="fixed">
+
+    <origin xyz="0.174 0.174 0.06" rpy="0 0 0"/>
+
+    <parent link="x500/base_link"/>
+    <child link="x500/rotor_2"/>
+
+  </joint>
+
+
+  <!-- ========================================================= -->
+  <!-- ROTOR 3                                                   -->
+  <!-- ========================================================= -->
+
+  <link name="x500/rotor_3">
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh
+          filename="package://asv_simulator/models/x500_base/meshes/1345_prop_cw.stl"
+          scale="1 1 1"/>
+      </geometry>
+    </visual>
+
+  </link>
+
+  <joint name="x500/rotor_3_joint" type="fixed">
+
+    <origin xyz="-0.174 -0.174 0.06" rpy="0 0 0"/>
+
+    <parent link="x500/base_link"/>
+    <child link="x500/rotor_3"/>
+
+  </joint>
+
+</robot>
