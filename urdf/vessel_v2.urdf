@@ -16,7 +16,7 @@
     <visual>
       <origin xyz="-2.5 0 0.78" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="/root/ros2_ws/src/asv_simulator/models/vessel_v2/meshes/vessel_simplified.stl" scale="0.0556 0.0556 0.0556"/>
+        <mesh filename="package://asv_simulator/models/vessel_v2/meshes/vessel_simplified.stl" scale="0.0556 0.0556 0.0556"/>
       </geometry>
     </visual>
   </link>
