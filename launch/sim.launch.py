@@ -3,12 +3,16 @@ from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, AppendEnvironmentVariable
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node, LifecycleNode
-from ament_index_python.packages import get_package_share_directory
+from ament_index_python.packages import (
+    get_package_prefix,
+    get_package_share_directory,
+)
 
 
 def generate_launch_description():
     pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim')
     pkg_asv_sim = get_package_share_directory('asv_simulator')
+    pkg_asv_sim_prefix = get_package_prefix('asv_simulator')
     
     world_file = os.path.join(pkg_asv_sim, 'worlds', 'ocean_world.sdf')
     rviz_config = os.path.join(pkg_asv_sim, 'configs', 'vessel_viz.rviz')
@@ -33,6 +37,11 @@ def generate_launch_description():
             'name': 'uav_0',
             'odom_topic': '/model/x500/odometry',
             'odom_frame': 'x500/odom',
+        },
+        {
+            'name': 'uuv_0',
+            'odom_topic': '/model/uuv_bluerov2_heavy/odometry',
+            'odom_frame': 'uuv_bluerov2_heavy/odom',
         },
     ]
 
@@ -102,6 +111,11 @@ def generate_launch_description():
         os.path.join(pkg_asv_sim, 'models')
     )
 
+    set_plugin_path = AppendEnvironmentVariable(
+        'GZ_SIM_SYSTEM_PLUGIN_PATH',
+        os.path.join(pkg_asv_sim_prefix, 'lib')
+    )
+
     x500_urdf_path = os.path.join(
         pkg_asv_sim,
         "urdf",
@@ -110,6 +124,15 @@ def generate_launch_description():
 
     with open(x500_urdf_path, "r") as f:
         x500_robot_description = f.read()
+
+    uuv_urdf_path = os.path.join(
+        pkg_asv_sim,
+        "urdf",
+        "uuv_bluerov2_heavy.urdf"
+    )
+
+    with open(uuv_urdf_path, "r") as f:
+        uuv_robot_description = f.read()
     
     # Nodo 1: Avvia Gazebo Harmonic
     gz_sim = IncludeLaunchDescription(
@@ -146,6 +169,7 @@ def generate_launch_description():
 
             # UAV BRIDGE
             '/model/x500/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry',
+            '/model/uuv_bluerov2_heavy/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry',
             '/x500/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist',
             '/x500/enable@std_msgs/msg/Bool]gz.msgs.Boolean',
             '/world/ocean_world/model/x500/link/base_link/sensor/navsat_sensor/navsat@sensor_msgs/msg/NavSatFix[gz.msgs.NavSat',
@@ -267,6 +291,20 @@ def generate_launch_description():
         ],
     )
 
+    uuv_robot_state_publisher = Node(
+        package="robot_state_publisher",
+        executable="robot_state_publisher",
+        namespace="uuv_bluerov2_heavy",
+        name="robot_state_publisher",
+        output="screen",
+        parameters=[
+            {
+                "robot_description": uuv_robot_description,
+                "use_sim_time": True,
+            }
+        ],
+    )
+
     # 5. Odometria custom
     #
     # Questi due nodi sono stati sostituiti dal broadcaster generico
@@ -378,6 +416,7 @@ def generate_launch_description():
    
     return LaunchDescription([
         set_model_path,
+        set_plugin_path,
         gz_sim,
         bridge,
 
@@ -393,6 +432,7 @@ def generate_launch_description():
 
         robot_state_publisher,
         x500_robot_state_publisher,
+        uuv_robot_state_publisher,
 
         tf_lidar,            # Attivato
         tf_camera,           # Attivato

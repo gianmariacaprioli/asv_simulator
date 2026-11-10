@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<robot name="uuv_bluerov2_heavy">
+  <link name="uuv_bluerov2_heavy/base_link">
+    <visual>
+      <origin xyz="0 0 -0.06" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://asv_simulator/models/uuv_bluerov2_heavy/meshes/BlueROV2heavy.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name="uuv_bluerov2_heavy/thruster0"><visual><geometry><mesh filename="package://asv_simulator/models/uuv_bluerov2_heavy/meshes/prop.dae"/></geometry></visual></link>
+  <joint name="uuv_bluerov2_heavy/thruster0_joint" type="fixed">
+    <origin xyz="0.14 -0.10 -0.06" rpy="0 1.570796 0.785398"/>
+    <parent link="uuv_bluerov2_heavy/base_link"/><child link="uuv_bluerov2_heavy/thruster0"/>
+  </joint>
+
+  <link name="uuv_bluerov2_heavy/thruster1"><visual><geometry><mesh filename="package://asv_simulator/models/uuv_bluerov2_heavy/meshes/prop.dae"/></geometry></visual></link>
+  <joint name="uuv_bluerov2_heavy/thruster1_joint" type="fixed">
+    <origin xyz="0.14 0.10 -0.06" rpy="0 1.570796 -0.785398"/>
+    <parent link="uuv_bluerov2_heavy/base_link"/><child link="uuv_bluerov2_heavy/thruster1"/>
+  </joint>
+
+  <link name="uuv_bluerov2_heavy/thruster2"><visual><geometry><mesh filename="package://asv_simulator/models/uuv_bluerov2_heavy/meshes/prop.dae"/></geometry></visual></link>
+  <joint name="uuv_bluerov2_heavy/thruster2_joint" type="fixed">
+    <origin xyz="-0.14 -0.10 -0.06" rpy="0 1.570796 -0.785398"/>
+    <parent link="uuv_bluerov2_heavy/base_link"/><child link="uuv_bluerov2_heavy/thruster2"/>
+  </joint>
+
+  <link name="uuv_bluerov2_heavy/thruster3"><visual><geometry><mesh filename="package://asv_simulator/models/uuv_bluerov2_heavy/meshes/prop.dae"/></geometry></visual></link>
+  <joint name="uuv_bluerov2_heavy/thruster3_joint" type="fixed">
+    <origin xyz="-0.14 0.10 -0.06" rpy="0 1.570796 0.785398"/>
+    <parent link="uuv_bluerov2_heavy/base_link"/><child link="uuv_bluerov2_heavy/thruster3"/>
+  </joint>
+
+  <link name="uuv_bluerov2_heavy/thruster4"><visual><geometry><mesh filename="package://asv_simulator/models/uuv_bluerov2_heavy/meshes/prop.dae"/></geometry></visual></link>
+  <joint name="uuv_bluerov2_heavy/thruster4_joint" type="fixed">
+    <origin xyz="0.12 -0.22 0" rpy="0 0 0"/>
+    <parent link="uuv_bluerov2_heavy/base_link"/><child link="uuv_bluerov2_heavy/thruster4"/>
+  </joint>
+
+  <link name="uuv_bluerov2_heavy/thruster5"><visual><geometry><mesh filename="package://asv_simulator/models/uuv_bluerov2_heavy/meshes/prop.dae"/></geometry></visual></link>
+  <joint name="uuv_bluerov2_heavy/thruster5_joint" type="fixed">
+    <origin xyz="0.12 0.22 0" rpy="3.1415 0 0"/>
+    <parent link="uuv_bluerov2_heavy/base_link"/><child link="uuv_bluerov2_heavy/thruster5"/>
+  </joint>
+
+  <link name="uuv_bluerov2_heavy/thruster6"><visual><geometry><mesh filename="package://asv_simulator/models/uuv_bluerov2_heavy/meshes/prop.dae"/></geometry></visual></link>
+  <joint name="uuv_bluerov2_heavy/thruster6_joint" type="fixed">
+    <origin xyz="-0.12 -0.22 0" rpy="3.1415 0 0"/>
+    <parent link="uuv_bluerov2_heavy/base_link"/><child link="uuv_bluerov2_heavy/thruster6"/>
+  </joint>
+
+  <link name="uuv_bluerov2_heavy/thruster7"><visual><geometry><mesh filename="package://asv_simulator/models/uuv_bluerov2_heavy/meshes/prop.dae"/></geometry></visual></link>
+  <joint name="uuv_bluerov2_heavy/thruster7_joint" type="fixed">
+    <origin xyz="-0.12 0.22 0" rpy="0 0 0"/>
+    <parent link="uuv_bluerov2_heavy/base_link"/><child link="uuv_bluerov2_heavy/thruster7"/>
+  </joint>
+</robot>
