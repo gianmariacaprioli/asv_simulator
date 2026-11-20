@@ -35,7 +35,7 @@
         <pose>-2.5 0 0.78 0 0 0</pose>
         <geometry>
           <mesh>
-          <uri>vessel_v2/meshes/vessel_simplified.stl</uri>          
+          <uri>model://vessel_v2/meshes/vessel_simplified.stl</uri>          
           <scale>0.0556 0.0556 0.0556</scale>
           <!-- <scale>0.0556 0.08 0.026</scale>  -->
           </mesh>
@@ -61,7 +61,7 @@
         <pose>0.0 0.0 0.0 0 0 3.14</pose> 
         <geometry>
           <mesh>
-            <uri>vessel_v2/meshes/vessel_propeller_simplified.stl</uri>          
+            <uri>model://vessel_v2/meshes/vessel_propeller_simplified.stl</uri>          
             <scale>0.1 0.1 0.1</scale>
           </mesh>
         </geometry>
@@ -86,7 +86,7 @@
         <pose>0.0 0.0 0.0 0 0.0 3.14</pose> 
         <geometry>
           <mesh>
-            <uri>vessel_v2/meshes/vessel_propeller_simplified.stl</uri>          
+            <uri>model://vessel_v2/meshes/vessel_propeller_simplified.stl</uri>          
             <scale>0.1 0.1 0.1</scale>
           </mesh>
         </geometry>

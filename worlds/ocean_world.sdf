@@ -31,6 +31,8 @@
       </graded_buoyancy>
       <enable>vessel_v2::base_link</enable>
       <enable>uuv_bluerov2_heavy::base_link</enable>
+      <enable>durius::base_link</enable>
+      <enable>nautilus_vessel::base_link</enable>
     </plugin>
 
     <model name="water_plane">
@@ -192,22 +194,11 @@
       </include>
     </model>
 
-    <include>
-      <uri>model://vessel_v2</uri>
-      <pose>0 0 0.0 0.0 0 0</pose>
-    </include>
-
-    <include>
-      <uri>model://x500</uri>
-      <name>x500</name>
-      <pose>-2.5 0 2 0 0 0</pose>
-    </include>
-
-    <include>
-      <uri>model://uuv_bluerov2_heavy</uri>
-      <name>uuv_bluerov2_heavy</name>
-      <pose>5 0 -1 0 0 0</pose>
-    </include>
+    <!--
+      Dynamic vehicles are intentionally spawned by their dedicated launch
+      files. sim.launch.py enables the original vessel_v2, x500 and UUV by
+      default, preserving the simulator's previous startup behaviour.
+    -->
 
   </world>
 </sdf>

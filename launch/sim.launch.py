@@ -1,7 +1,14 @@
 import os
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, AppendEnvironmentVariable
+from launch.actions import (
+    AppendEnvironmentVariable,
+    DeclareLaunchArgument,
+    GroupAction,
+    IncludeLaunchDescription,
+)
+from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node, LifecycleNode
 from ament_index_python.packages import (
     get_package_prefix,
@@ -141,44 +148,58 @@ def generate_launch_description():
         ),
         launch_arguments={'gz_args': f'-r -v 4 {world_file}'}.items(),
     )
+
+    # -------------------------------------------------------------------------
+    # OPTIONAL DYNAMIC MODEL SPAWN
+    #
+    # No dynamic vehicle is spawned by default. Each flag includes the same
+    # dedicated spawn_*.launch.py that can also be invoked later by the user.
+    # Every include has an isolated launch-configuration scope, so generic
+    # child arguments such as x/y/z cannot leak from one model into another.
+    # Fixed entity names preserve topics, controllers and buoyancy filters.
+    # -------------------------------------------------------------------------
+    def optional_spawn_launch(launch_file, flag):
+        return GroupAction(
+            scoped=True,
+            forwarding=False,
+            condition=IfCondition(LaunchConfiguration(flag)),
+            actions=[
+                IncludeLaunchDescription(
+                    PythonLaunchDescriptionSource(
+                        os.path.join(pkg_asv_sim, 'launch', launch_file)
+                    )
+                )
+            ],
+        )
+
+    spawn_vessel_v2 = optional_spawn_launch(
+        'spawn_vessel_v2.launch.py',
+        'spawn_vessel_v2',
+    )
+    spawn_uav = optional_spawn_launch(
+        'spawn_uav.launch.py',
+        'spawn_uav',
+    )
+    spawn_uuv = optional_spawn_launch(
+        'spawn_uuv.launch.py',
+        'spawn_uuv',
+    )
+    spawn_durius = optional_spawn_launch(
+        'spawn_durius.launch.py',
+        'spawn_durius',
+    )
+    spawn_nautilus = optional_spawn_launch(
+        'spawn_nautilus.launch.py',
+        'spawn_nautilus',
+    )
     
-    # Nodo 2: Il Ponte di Comunicazione aggiornato con le TF
+    # Global bridge. Entity-specific bridges live in their spawn launch files.
     bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
+        name='clock_bridge',
         arguments=[
             '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
-            
-            # '/model/vessel_v2/pose@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
-            '/model/vessel_v2/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry',
-            
-            # --- AGGIUNTO: Porta i joint_states da Gazebo a ROS ---
-            '/world/ocean_world/model/vessel_v2/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model',
-            
-            '/model/vessel_v2/joint/left_engine_joint/cmd_thrust@std_msgs/msg/Float64]gz.msgs.Double',
-            '/model/vessel_v2/joint/right_engine_joint/cmd_thrust@std_msgs/msg/Float64]gz.msgs.Double',
-
-            '/vessel_v2/camera@sensor_msgs/msg/Image[gz.msgs.Image',
-            '/vessel_v2/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
-
-            # '/vessel_v2/lidar@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan',
-            '/vessel_v2/lidar/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
-            '/vessel_v2/sonar/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
-
-            '/vessel_v2/gps/fix@sensor_msgs/msg/NavSatFix[gz.msgs.NavSat',
-
-            # UAV BRIDGE
-            '/model/x500/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry',
-            '/model/uuv_bluerov2_heavy/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry',
-            '/x500/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist',
-            '/x500/enable@std_msgs/msg/Bool]gz.msgs.Boolean',
-            '/world/ocean_world/model/x500/link/base_link/sensor/navsat_sensor/navsat@sensor_msgs/msg/NavSatFix[gz.msgs.NavSat',
-        ],
-        remappings=[
-            # ('/model/vessel_v2/pose', '/tf'),
-            # --- AGGIUNTO: Rimappa il topic sul default di ROS 2 ---
-            ('/world/ocean_world/model/vessel_v2/joint_state', '/joint_states'),    
-            ('/world/ocean_world/model/x500/link/base_link/sensor/navsat_sensor/navsat','/x500/gps/fix'),
         ],
         output='screen'
     )
@@ -415,9 +436,39 @@ def generate_launch_description():
     # )
    
     return LaunchDescription([
+        DeclareLaunchArgument(
+            'spawn_vessel_v2',
+            default_value='false',
+            description='Include the vessel_v2 spawn launcher.',
+        ),
+        DeclareLaunchArgument(
+            'spawn_uav',
+            default_value='false',
+            description='Include the x500 UAV spawn launcher.',
+        ),
+        DeclareLaunchArgument(
+            'spawn_uuv',
+            default_value='false',
+            description='Include the BlueROV2 Heavy spawn launcher.',
+        ),
+        DeclareLaunchArgument(
+            'spawn_durius',
+            default_value='false',
+            description='Optionally spawn DURIUS with the main simulator.',
+        ),
+        DeclareLaunchArgument(
+            'spawn_nautilus',
+            default_value='false',
+            description='Optionally spawn Nautilus with the main simulator.',
+        ),
         set_model_path,
         set_plugin_path,
         gz_sim,
+        spawn_vessel_v2,
+        spawn_uav,
+        spawn_uuv,
+        spawn_durius,
+        spawn_nautilus,
         bridge,
 
         # Map server / SLAM restano disabilitati per ora.

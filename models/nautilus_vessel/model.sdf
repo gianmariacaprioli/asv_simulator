@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<sdf version="1.9">
+  <model name="nautilus_vessel">
+    <static>false</static>
+    <self_collide>false</self_collide>
+    <allow_auto_disable>false</allow_auto_disable>
+
+    <!-- Places the bottom of a 0.43 m pontoon at the requested 0.18 m draft. -->
+    <pose>0 0 0.035 0 0 0</pose>
+
+    <link name="base_link">
+      <inertial>
+        <!-- CAD CG (0, -0.1, -0.05) transformed into the body frame. -->
+        <pose>0.1 0 -0.05 0 0 0</pose>
+        <!-- Two 1 g propeller links keep total model mass equal to 260 kg. -->
+        <mass>259.998</mass>
+        <inertia>
+          <!-- CAD X/Y moments swap under the CAD-to-body rotation. -->
+          <ixx>187.0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>88.0</iyy>
+          <iyz>0</iyz>
+          <izz>215.0</izz>
+        </inertia>
+      </inertial>
+
+      <!-- X forward, Y port, Z up. Keep pontoons as separate volumes. -->
+      <collision name="port_pontoon_collision">
+        <pose>0 0.75 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>2.70 0.40 0.43</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <collision name="starboard_pontoon_collision">
+        <pose>0 -0.75 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>2.70 0.40 0.43</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <visual name="hull_visual">
+        <!-- Rz(+pi/2): Xbody=-Ycad, Ybody=Xcad, Zbody=Zcad. -->
+        <pose>0 0 0 0 0 1.57079632679</pose>
+        <geometry>
+          <mesh>
+            <uri>model://nautilus_vessel/meshes/nautilus_vessel_hull.stl</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.12 0.32 0.48 1</ambient>
+          <diffuse>0.18 0.48 0.70 1</diffuse>
+          <specular>0.25 0.25 0.25 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="propeller_left_link">
+      <pose>-1.35 0.75 -0.12 0 0 0</pose>
+      <inertial>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>0.000001</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.000001</iyy>
+          <iyz>0</iyz>
+          <izz>0.000001</izz>
+        </inertia>
+      </inertial>
+      <visual name="propeller_left_visual">
+        <pose>0 0 0 0 0 1.57079632679</pose>
+        <geometry>
+          <mesh>
+            <uri>model://nautilus_vessel/meshes/nautilus_propeller_left.stl</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.15 0.15 0.15 1</ambient>
+          <diffuse>0.25 0.25 0.25 1</diffuse>
+        </material>
+      </visual>
+    </link>
+
+    <link name="propeller_right_link">
+      <pose>-1.35 -0.75 -0.12 0 0 0</pose>
+      <inertial>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>0.000001</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.000001</iyy>
+          <iyz>0</iyz>
+          <izz>0.000001</izz>
+        </inertia>
+      </inertial>
+      <visual name="propeller_right_visual">
+        <pose>0 0 0 0 0 1.57079632679</pose>
+        <geometry>
+          <mesh>
+            <uri>model://nautilus_vessel/meshes/nautilus_propeller_right.stl</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.15 0.15 0.15 1</ambient>
+          <diffuse>0.25 0.25 0.25 1</diffuse>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="propeller_left_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>propeller_left_link</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1e16</lower>
+          <upper>1e16</upper>
+        </limit>
+      </axis>
+    </joint>
+
+    <joint name="propeller_right_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>propeller_right_link</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1e16</lower>
+          <upper>1e16</upper>
+        </limit>
+      </axis>
+    </joint>
+
+    <!--
+      Gazebo Harmonic's Hydrodynamics system uses signed damping derivatives.
+      Only the supplied linear and quadratic terms are included; no added mass
+      or propulsion coefficients are invented here.
+    -->
+    <plugin filename="gz-sim-hydrodynamics-system"
+            name="gz::sim::systems::Hydrodynamics">
+      <link_name>base_link</link_name>
+      <xU>-100</xU>
+      <xUabsU>-55</xUabsU>
+      <yV>-250</yV>
+      <yVabsV>-220</yVabsV>
+      <zW>-400</zW>
+      <zWabsW>-300</zWabsW>
+      <kP>-150</kP>
+      <kPabsP>-120</kPabsP>
+      <mQ>-200</mQ>
+      <mQabsQ>-180</mQabsQ>
+      <nR>-120</nR>
+      <nRabsR>-140</nRabsR>
+    </plugin>
+
+    <plugin filename="gz-sim-odometry-publisher-system"
+            name="gz::sim::systems::OdometryPublisher">
+      <odom_frame>nautilus_vessel/odom</odom_frame>
+      <robot_base_frame>nautilus_vessel/base_link</robot_base_frame>
+      <odom_publish_frequency>20</odom_publish_frequency>
+      <dimensions>3</dimensions>
+    </plugin>
+  </model>
+</sdf>
