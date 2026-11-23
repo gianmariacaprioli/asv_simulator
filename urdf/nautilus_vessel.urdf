@@ -3,6 +3,7 @@
   <material name="nautilus_blue">
     <color rgba="0.18 0.48 0.70 1"/>
   </material>
+
   <material name="propeller_dark">
     <color rgba="0.25 0.25 0.25 1"/>
   </material>
@@ -17,7 +18,7 @@
     </inertial>
 
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 1.57079632679"/>
+      <origin xyz="-0.404 0 -0.470" rpy="0 0 1.094045"/>
       <geometry>
         <mesh
           filename="package://asv_simulator/models/nautilus_vessel/meshes/nautilus_vessel_hull.stl"
@@ -26,17 +27,31 @@
       <material name="nautilus_blue"/>
     </visual>
 
-    <collision name="port_pontoon_collision">
-      <origin xyz="0 0.75 0" rpy="0 0 0"/>
+    <collision name="port_forward_collision">
+      <origin xyz="0.775 0.52 0" rpy="0 0 0"/>
       <geometry>
-        <box size="2.70 0.40 0.43"/>
+        <box size="1.35 0.40 0.43"/>
       </geometry>
     </collision>
 
-    <collision name="starboard_pontoon_collision">
-      <origin xyz="0 -0.75 0" rpy="0 0 0"/>
+    <collision name="port_aft_collision">
+      <origin xyz="-0.575 0.52 0" rpy="0 0 0"/>
       <geometry>
-        <box size="2.70 0.40 0.43"/>
+        <box size="1.35 0.40 0.43"/>
+      </geometry>
+    </collision>
+
+    <collision name="starboard_forward_collision">
+      <origin xyz="0.775 -0.52 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="1.35 0.40 0.43"/>
+      </geometry>
+    </collision>
+
+    <collision name="starboard_aft_collision">
+      <origin xyz="-0.575 -0.52 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="1.35 0.40 0.43"/>
       </geometry>
     </collision>
   </link>
@@ -49,12 +64,12 @@
         ixx="0.000001" ixy="0" ixz="0"
         iyy="0.000001" iyz="0" izz="0.000001"/>
     </inertial>
+
     <visual>
       <origin xyz="0 0 0" rpy="0 0 1.57079632679"/>
       <geometry>
-        <mesh
-          filename="package://asv_simulator/models/nautilus_vessel/meshes/nautilus_propeller_left.stl"
-          scale="0.001 0.001 0.001"/>
+        <mesh filename="package://asv_simulator/models/nautilus_vessel/meshes/nautilus_propeller_left.stl"
+              scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="propeller_dark"/>
     </visual>
@@ -68,19 +83,19 @@
         ixx="0.000001" ixy="0" ixz="0"
         iyy="0.000001" iyz="0" izz="0.000001"/>
     </inertial>
+
     <visual>
       <origin xyz="0 0 0" rpy="0 0 1.57079632679"/>
       <geometry>
-        <mesh
-          filename="package://asv_simulator/models/nautilus_vessel/meshes/nautilus_propeller_right.stl"
-          scale="0.001 0.001 0.001"/>
+        <mesh filename="package://asv_simulator/models/nautilus_vessel/meshes/nautilus_propeller_right.stl"
+              scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="propeller_dark"/>
     </visual>
   </link>
 
   <joint name="propeller_left_joint" type="revolute">
-    <origin xyz="-1.35 0.75 -0.12" rpy="0 0 0"/>
+    <origin xyz="-1.530 0.345 -0.3355" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="propeller_left_link"/>
     <axis xyz="1 0 0"/>
@@ -88,7 +103,7 @@
   </joint>
 
   <joint name="propeller_right_joint" type="revolute">
-    <origin xyz="-1.35 -0.75 -0.12" rpy="0 0 0"/>
+    <origin xyz="-1.530 -0.345 -0.3355" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="propeller_right_link"/>
     <axis xyz="1 0 0"/>

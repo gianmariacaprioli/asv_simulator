@@ -268,6 +268,21 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
+    - Alpha: 1
+      Class: rviz_default_plugins/RobotModel
+      Collision Enabled: false
+      Description Source: Topic
+      Description Topic:
+        Depth: 5
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /nautilus_vessel/robot_description
+      Enabled: true
+      Name: Nautilus RobotModel
+      TF Prefix: nautilus_vessel
+      Value: true
+      Visual Enabled: true
     - Class: rviz_default_plugins/Camera
       Enabled: true
       Far Plane Distance: 100

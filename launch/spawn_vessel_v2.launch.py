@@ -4,14 +4,16 @@ import os
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, GroupAction, IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
 
 def generate_launch_description():
+    package_share = get_package_share_directory('asv_simulator')
     model_file = os.path.join(
-        get_package_share_directory('asv_simulator'),
+        package_share,
         'models',
         'vessel_v2',
         'vessel_v2.sdf',
@@ -67,4 +69,15 @@ def generate_launch_description():
         DeclareLaunchArgument('yaw', default_value='0.0'),
         spawn,
         bridge,
+        GroupAction([
+            IncludeLaunchDescription(
+                PythonLaunchDescriptionSource(
+                    os.path.join(package_share, 'launch', 'vehicle_tf.launch.py')
+                ),
+                launch_arguments={
+                    'model': 'vessel_v2',
+                    'world': LaunchConfiguration('world'),
+                }.items(),
+            ),
+        ]),
     ])

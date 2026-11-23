@@ -5,8 +5,8 @@
     <self_collide>false</self_collide>
     <allow_auto_disable>false</allow_auto_disable>
 
-    <!-- Places the bottom of a 0.43 m pontoon at the requested 0.18 m draft. -->
-    <pose>0 0 0.035 0 0 0</pose>
+    <!-- Equilibrium height for 260 kg on the buoyancy boxes in seawater. -->
+    <pose>0 0 0.098 0 0 0</pose>
 
     <link name="base_link">
       <inertial>
@@ -25,28 +25,49 @@
         </inertia>
       </inertial>
 
-      <!-- X forward, Y port, Z up. Keep pontoons as separate volumes. -->
-      <collision name="port_pontoon_collision">
-        <pose>0 0.75 0 0 0 0</pose>
+      <!-- Separate fore and aft volumes restore pitch in Gazebo 8.15,
+           where the buoyancy plugin slices each shape along its local Z axis.
+           Their longitudinal center matches the center of mass. -->
+      <collision name="port_forward_collision">
+        <pose>0.775 0.52 0 0 0 0</pose>
         <geometry>
           <box>
-            <size>2.70 0.40 0.43</size>
+            <size>1.35 0.40 0.43</size>
           </box>
         </geometry>
       </collision>
 
-      <collision name="starboard_pontoon_collision">
-        <pose>0 -0.75 0 0 0 0</pose>
+      <collision name="port_aft_collision">
+        <pose>-0.575 0.52 0 0 0 0</pose>
         <geometry>
           <box>
-            <size>2.70 0.40 0.43</size>
+            <size>1.35 0.40 0.43</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <collision name="starboard_forward_collision">
+        <pose>0.775 -0.52 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.35 0.40 0.43</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <collision name="starboard_aft_collision">
+        <pose>-0.575 -0.52 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.35 0.40 0.43</size>
           </box>
         </geometry>
       </collision>
 
       <visual name="hull_visual">
-        <!-- Rz(+pi/2): Xbody=-Ycad, Ybody=Xcad, Zbody=Zcad. -->
-        <pose>0 0 0 0 0 1.57079632679</pose>
+        <!-- Align the assembled CAD to the shaft axis and buoyancy-box keel.
+             The exported hull already contains both visible motor assemblies. -->
+        <pose>-0.404 0 -0.470 0 0 1.094045</pose>
         <geometry>
           <mesh>
             <uri>model://nautilus_vessel/meshes/nautilus_vessel_hull.stl</uri>
@@ -62,7 +83,7 @@
     </link>
 
     <link name="propeller_left_link">
-      <pose>-1.35 0.75 -0.12 0 0 0</pose>
+      <pose>-1.530 0.345 -0.3355 0 0 0</pose>
       <inertial>
         <mass>0.001</mass>
         <inertia>
@@ -74,7 +95,9 @@
           <izz>0.000001</izz>
         </inertia>
       </inertial>
+
       <visual name="propeller_left_visual">
+        <!-- The propeller STL shaft is on CAD Y. Rotate it onto body X. -->
         <pose>0 0 0 0 0 1.57079632679</pose>
         <geometry>
           <mesh>
@@ -83,14 +106,13 @@
           </mesh>
         </geometry>
         <material>
-          <ambient>0.15 0.15 0.15 1</ambient>
           <diffuse>0.25 0.25 0.25 1</diffuse>
         </material>
       </visual>
     </link>
 
     <link name="propeller_right_link">
-      <pose>-1.35 -0.75 -0.12 0 0 0</pose>
+      <pose>-1.530 -0.345 -0.3355 0 0 0</pose>
       <inertial>
         <mass>0.001</mass>
         <inertia>
@@ -102,7 +124,9 @@
           <izz>0.000001</izz>
         </inertia>
       </inertial>
+
       <visual name="propeller_right_visual">
+        <!-- The propeller STL shaft is on CAD Y. Rotate it onto body X. -->
         <pose>0 0 0 0 0 1.57079632679</pose>
         <geometry>
           <mesh>
@@ -111,7 +135,6 @@
           </mesh>
         </geometry>
         <material>
-          <ambient>0.15 0.15 0.15 1</ambient>
           <diffuse>0.25 0.25 0.25 1</diffuse>
         </material>
       </visual>
@@ -161,6 +184,11 @@
       <mQabsQ>-180</mQabsQ>
       <nR>-120</nR>
       <nRabsR>-140</nRabsR>
+    </plugin>
+
+    <plugin filename="gz-sim-joint-state-publisher-system"
+            name="gz::sim::systems::JointStatePublisher">
+      <topic>/model/nautilus_vessel/joint_state</topic>
     </plugin>
 
     <plugin filename="gz-sim-odometry-publisher-system"
