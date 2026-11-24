@@ -3,12 +3,18 @@ from launch import LaunchDescription
 from launch.actions import (
     AppendEnvironmentVariable,
     DeclareLaunchArgument,
+    ExecuteProcess,
     GroupAction,
     IncludeLaunchDescription,
 )
-from launch.conditions import IfCondition, UnlessCondition
+from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import IfElseSubstitution, LaunchConfiguration
+from launch.substitutions import (
+    AndSubstitution,
+    LaunchConfiguration,
+    NotSubstitution,
+    PathJoinSubstitution,
+)
 from launch_ros.actions import Node, LifecycleNode
 from ament_index_python.packages import (
     get_package_prefix,
@@ -22,7 +28,9 @@ def generate_launch_description():
     pkg_asv_sim_prefix = get_package_prefix('asv_simulator')
     
     world_file = os.path.join(pkg_asv_sim, 'worlds', 'ocean_world.sdf')
-    rviz_config = os.path.join(pkg_asv_sim, 'configs', 'vessel_viz.rviz')
+    rviz_config = PathJoinSubstitution([
+        pkg_asv_sim, 'configs', LaunchConfiguration('rviz_config')
+    ])
     map_yaml_file = os.path.join(pkg_asv_sim, 'map', 'map.yaml')
 
     set_model_path = AppendEnvironmentVariable(
@@ -35,17 +43,23 @@ def generate_launch_description():
         os.path.join(pkg_asv_sim_prefix, 'lib')
     )
 
-    # Nodo 1: Avvia Gazebo Harmonic
+    # Start physics independently. Gazebo's combined mode can wait for GUI
+    # startup before loading the world, which also blocks entity creation.
     gz_sim = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_ros_gz_sim, 'launch', 'gz_sim.launch.py')
         ),
         launch_arguments={
-            'gz_args': [
-                IfElseSubstitution(LaunchConfiguration('headless'), '-s ', ''),
-                f'-r -v 4 "{world_file}"',
-            ]
+            'gz_args': f'-s -r -v 4 "{world_file}"',
         }.items(),
+    )
+    gz_gui = ExecuteProcess(
+        cmd=['gz', 'sim', '-g', '-v', '3',
+             '--render-engine-gui', LaunchConfiguration('gui_render_engine')],
+        condition=IfCondition(AndSubstitution(
+            NotSubstitution(LaunchConfiguration('headless')), LaunchConfiguration('start_gz_gui')
+        )),
+        output='screen',
     )
 
     # -------------------------------------------------------------------------
@@ -136,7 +150,9 @@ def generate_launch_description():
         package='rviz2',
         executable='rviz2',
         name='rviz2',
-        condition=UnlessCondition(LaunchConfiguration('headless')),
+        condition=IfCondition(AndSubstitution(
+            NotSubstitution(LaunchConfiguration('headless')), LaunchConfiguration('start_rviz')
+        )),
         arguments=['-d', rviz_config],
         parameters=[{'use_sim_time': True}], # 
         output='screen'
@@ -147,6 +163,26 @@ def generate_launch_description():
             'headless',
             default_value='false',
             description='Run Gazebo server only and skip RViz.',
+        ),
+        DeclareLaunchArgument(
+            'start_gz_gui',
+            default_value='true',
+            description='Open the Gazebo GUI. The simulation server is always started.',
+        ),
+        DeclareLaunchArgument(
+            'start_rviz',
+            default_value='true',
+            description='Open RViz when headless mode is disabled.',
+        ),
+        DeclareLaunchArgument(
+            'rviz_config',
+            default_value='vessel_viz.rviz',
+            description='RViz configuration file inside the simulator configs directory.',
+        ),
+        DeclareLaunchArgument(
+            'gui_render_engine',
+            default_value='ogre',
+            description='Rendering engine used by the Gazebo GUI.',
         ),
         DeclareLaunchArgument(
             'spawn_vessel_v2',
@@ -176,6 +212,7 @@ def generate_launch_description():
         set_model_path,
         set_plugin_path,
         gz_sim,
+        gz_gui,
         spawn_vessel_v2,
         spawn_uav,
         spawn_uuv,

@@ -187,6 +187,9 @@ public: double maxRotVelocity = 838.0;
 	/// to be stopped. Simulates minimum velocity achieved by the motor
 public: double minCommand = 0.0;
 
+	/// \brief Direction of polynomial thrust in the propeller link frame.
+public: math::Vector3d thrustAxis{0, 0, 1};
+
 	/// \brief Maximum duty cycle value
 public: double maxDutyCycle = 0.0;
 
@@ -403,6 +406,15 @@ void GenericMotorModel::Configure(const Entity &_entity,
 
 		} else if (motorType == "force_polynomial") {
 			this->dataPtr->motorType = MotorType::kForcePolynomial;
+			if (sdfClone->HasElement("thrustAxis")) {
+				auto axis = sdfClone->Get<math::Vector3d>("thrustAxis");
+				if (!axis.IsFinite() || axis.Length() < 1e-9) {
+					gzerr << "thrustAxis must be a finite nonzero vector.\n";
+					return;
+				}
+				axis.Normalize();
+				this->dataPtr->thrustAxis = axis;
+			}
 
 			// Check validity of required parameters
 			if (sdfClone->HasElement("positiveThrustPolynomial")) {
@@ -760,7 +772,7 @@ void GenericMotorModelPrivate::UpdateForcesAndMoments(
 				thrust = 0.0;
 			}
 
-			link.AddWorldForce(_ecm, worldPose->Rot().RotateVector(Vector3(0, 0, thrust)));
+			link.AddWorldForce(_ecm, worldPose->Rot().RotateVector(this->thrustAxis * thrust));
 
 			// Compute torques
 			double torque = 0.0;

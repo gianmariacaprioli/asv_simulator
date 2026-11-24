@@ -46,6 +46,7 @@ def generate_launch_description():
         name='nautilus_bridge',
         output='screen',
         arguments=[
+            '/nautilus_vessel/command/motor_speed@actuator_msgs/msg/Actuators]gz.msgs.Actuators',
             f'{odom_topic}@nav_msgs/msg/Odometry[gz.msgs.Odometry',
             f'{joint_state_topic}@sensor_msgs/msg/JointState[gz.msgs.Model',
         ],

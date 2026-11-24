@@ -44,10 +44,9 @@ def generate_launch_description():
         name='vessel_v2_bridge',
         output='screen',
         arguments=[
+            '/vessel_v2/command/motor_speed@actuator_msgs/msg/Actuators]gz.msgs.Actuators',
             '/model/vessel_v2/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry',
             '/world/ocean_world/model/vessel_v2/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model',
-            '/model/vessel_v2/joint/left_engine_joint/cmd_thrust@std_msgs/msg/Float64]gz.msgs.Double',
-            '/model/vessel_v2/joint/right_engine_joint/cmd_thrust@std_msgs/msg/Float64]gz.msgs.Double',
             '/vessel_v2/camera@sensor_msgs/msg/Image[gz.msgs.Image',
             '/vessel_v2/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
             '/vessel_v2/lidar/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',

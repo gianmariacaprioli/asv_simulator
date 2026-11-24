@@ -4,6 +4,36 @@
     <static>false</static>
     <self_collide>false</self_collide>
     <allow_auto_disable>false</allow_auto_disable>
+    <!-- Provisional thrust curve for simulation checkout. -->
+    <!-- Actuators.velocity uses signed commands in [-1, 1], port then starboard. -->
+    <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
+      <jointName>propeller_left_joint</jointName>
+      <linkName>propeller_left_link</linkName>
+      <actuator_number>0</actuator_number>
+      <turningDirection>ccw</turningDirection>
+      <commandSubTopic>command/motor_speed</commandSubTopic>
+      <motorType>force_polynomial</motorType>
+      <controlMethod>rpm</controlMethod>
+      <maxRotVelocity>1</maxRotVelocity>
+      <rotorVelocitySlowdownSim>0.05</rotorVelocitySlowdownSim>
+      <thrustAxis>1 0 0</thrustAxis>
+      <positiveThrustPolynomial>[0, 150, 0, 0]</positiveThrustPolynomial>
+      <negativeThrustPolynomial>[0, 150, 0, 0]</negativeThrustPolynomial>
+    </plugin>
+    <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
+      <jointName>propeller_right_joint</jointName>
+      <linkName>propeller_right_link</linkName>
+      <actuator_number>1</actuator_number>
+      <turningDirection>cw</turningDirection>
+      <commandSubTopic>command/motor_speed</commandSubTopic>
+      <motorType>force_polynomial</motorType>
+      <controlMethod>rpm</controlMethod>
+      <maxRotVelocity>1</maxRotVelocity>
+      <rotorVelocitySlowdownSim>0.05</rotorVelocitySlowdownSim>
+      <thrustAxis>1 0 0</thrustAxis>
+      <positiveThrustPolynomial>[0, 150, 0, 0]</positiveThrustPolynomial>
+      <negativeThrustPolynomial>[0, 150, 0, 0]</negativeThrustPolynomial>
+    </plugin>
 
     <!-- Equilibrium height for 260 kg on the buoyancy boxes in seawater. -->
     <pose>0 0 0.098 0 0 0</pose>
@@ -70,7 +100,7 @@
         <pose>-0.404 0 -0.470 0 0 1.094045</pose>
         <geometry>
           <mesh>
-            <uri>model://nautilus_vessel/meshes/nautilus_vessel_hull.stl</uri>
+            <uri>model://nautilus_vessel/meshes/nautilus_vessel_hull_simplified.stl</uri>
             <scale>0.001 0.001 0.001</scale>
           </mesh>
         </geometry>
