@@ -71,10 +71,11 @@ def generate_launch_description():
     # child arguments such as x/y/z cannot leak from one model into another.
     # Fixed entity names preserve topics, controllers and buoyancy filters.
     # -------------------------------------------------------------------------
-    def optional_spawn_launch(launch_file, flag):
+    def optional_spawn_launch(launch_file, flag, launch_configurations=None):
         return GroupAction(
             scoped=True,
             forwarding=False,
+            launch_configurations=launch_configurations,
             condition=IfCondition(LaunchConfiguration(flag)),
             actions=[
                 IncludeLaunchDescription(
@@ -92,6 +93,7 @@ def generate_launch_description():
     spawn_uav = optional_spawn_launch(
         'spawn_uav.launch.py',
         'spawn_uav',
+        {'external_control': LaunchConfiguration('x500_external_control')},
     )
     spawn_uuv = optional_spawn_launch(
         'spawn_uuv.launch.py',
@@ -193,6 +195,11 @@ def generate_launch_description():
             'spawn_uav',
             default_value='false',
             description='Include the x500 UAV spawn launcher.',
+        ),
+        DeclareLaunchArgument(
+            'x500_external_control',
+            default_value='false',
+            description='Spawn X500 without the local Gazebo velocity controller.',
         ),
         DeclareLaunchArgument(
             'spawn_uuv',

@@ -288,11 +288,9 @@
       <!-- forza su su x.y.z -->
       <link_name>base_link</link_name>
       <!-- SURGE (X) -->
-      <!-- <xU>0.0</xU>
-      <xUabsU>300.0</xUabsU>  reale
-      Inserendo -1850.0, fai in modo che alla velocità limite di circa 5 m/s, la resistenza quadratica generi una forza frenante (1850⋅5^2 ≈46.250 N) che, sommata allo smorzamento lineare, bilancia esattamente i 60.000 N (60 kN) di spinta massima delle tue due eliche.-->
+      <!-- At 5 m/s, linear and quadratic drag sum to 60 kN. -->
       <xU>-2750.0</xU>
-      <xUabsU>-1500.0</xUabsU>
+      <xUabsU>-1850.0</xUabsU>
       <!-- SWAY (Y) -->
       <!-- <yV>0.0</yV>
       <yVabsV>0.0</yVabsV> -->
