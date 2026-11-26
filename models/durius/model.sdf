@@ -53,7 +53,7 @@
         <pose>-0.623164 0.279401 -0.023381 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>file:///root/vessel_ws/usv_simulator_files/DURIUS_simplified.stl</uri>
+            <uri>model://durius/meshes/DURIUS_simplified.stl</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>

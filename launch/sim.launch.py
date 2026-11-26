@@ -11,8 +11,11 @@ from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import (
     AndSubstitution,
+    EqualsSubstitution,
+    IfElseSubstitution,
     LaunchConfiguration,
     NotSubstitution,
+    OrSubstitution,
     PathJoinSubstitution,
 )
 from launch_ros.actions import Node, LifecycleNode
@@ -27,7 +30,9 @@ def generate_launch_description():
     pkg_asv_sim = get_package_share_directory('asv_simulator')
     pkg_asv_sim_prefix = get_package_prefix('asv_simulator')
     
-    world_file = os.path.join(pkg_asv_sim, 'worlds', 'ocean_world.sdf')
+    world = LaunchConfiguration('world')
+    is_viana = EqualsSubstitution(world, 'viana_port')
+    world_file = PathJoinSubstitution([pkg_asv_sim, 'worlds', [world, '.sdf']])
     rviz_config = PathJoinSubstitution([
         pkg_asv_sim, 'configs', LaunchConfiguration('rviz_config')
     ])
@@ -50,7 +55,7 @@ def generate_launch_description():
             os.path.join(pkg_ros_gz_sim, 'launch', 'gz_sim.launch.py')
         ),
         launch_arguments={
-            'gz_args': f'-s -r -v 4 "{world_file}"',
+            'gz_args': ['-s -r -v 4 "', world_file, '"'],
         }.items(),
     )
     gz_gui = ExecuteProcess(
@@ -71,12 +76,12 @@ def generate_launch_description():
     # child arguments such as x/y/z cannot leak from one model into another.
     # Fixed entity names preserve topics, controllers and buoyancy filters.
     # -------------------------------------------------------------------------
-    def optional_spawn_launch(launch_file, flag, launch_configurations=None):
+    def optional_spawn_launch(launch_file, enabled, **configurations):
         return GroupAction(
             scoped=True,
             forwarding=False,
-            launch_configurations=launch_configurations,
-            condition=IfCondition(LaunchConfiguration(flag)),
+            launch_configurations={'world': world, **configurations},
+            condition=IfCondition(enabled),
             actions=[
                 IncludeLaunchDescription(
                     PythonLaunchDescriptionSource(
@@ -88,24 +93,51 @@ def generate_launch_description():
 
     spawn_vessel_v2 = optional_spawn_launch(
         'spawn_vessel_v2.launch.py',
-        'spawn_vessel_v2',
+        LaunchConfiguration('spawn_vessel_v2'),
+        x=IfElseSubstitution(is_viana, '-25.0', '0.0'),
     )
     spawn_uav = optional_spawn_launch(
         'spawn_uav.launch.py',
-        'spawn_uav',
-        {'external_control': LaunchConfiguration('x500_external_control')},
+        LaunchConfiguration('spawn_uav'),
+        external_control=LaunchConfiguration('x500_external_control'),
+        x=IfElseSubstitution(is_viana, '0.0', '-2.5'),
+        y=IfElseSubstitution(is_viana, '-18.0', '0.0'),
     )
     spawn_uuv = optional_spawn_launch(
         'spawn_uuv.launch.py',
-        'spawn_uuv',
+        LaunchConfiguration('spawn_uuv'),
+        x=IfElseSubstitution(is_viana, '20.0', '5.0'),
     )
     spawn_durius = optional_spawn_launch(
         'spawn_durius.launch.py',
-        'spawn_durius',
+        OrSubstitution(is_viana, LaunchConfiguration('spawn_durius')),
+        spawn_entity=NotSubstitution(is_viana),
+    )
+    windturbine_visualization = GroupAction(
+        condition=IfCondition(EqualsSubstitution(world, 'ocean_world')),
+        actions=[
+            Node(
+                package='ros_gz_bridge',
+                executable='parameter_bridge',
+                name='windturbine_odometry_bridge',
+                arguments=[
+                    '/model/floating_windturbine/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry',
+                ],
+                output='screen',
+            ),
+            IncludeLaunchDescription(
+                PythonLaunchDescriptionSource(
+                    os.path.join(pkg_asv_sim, 'launch', 'vehicle_tf.launch.py')
+                ),
+                launch_arguments={'world': world, 'model': 'floating_windturbine'}.items(),
+            ),
+        ],
     )
     spawn_nautilus = optional_spawn_launch(
         'spawn_nautilus.launch.py',
-        'spawn_nautilus',
+        LaunchConfiguration('spawn_nautilus'),
+        x=IfElseSubstitution(is_viana, '-37.0', '-10.0'),
+        y=IfElseSubstitution(is_viana, '-17.0', '0.0'),
     )
     
     # Global bridge. Entity-specific bridges live in their spawn launch files.
@@ -153,18 +185,27 @@ def generate_launch_description():
         executable='rviz2',
         name='rviz2',
         condition=IfCondition(AndSubstitution(
-            NotSubstitution(LaunchConfiguration('headless')), LaunchConfiguration('start_rviz')
+            LaunchConfiguration('start_rviz'),
+            OrSubstitution(
+                NotSubstitution(LaunchConfiguration('headless')),
+                LaunchConfiguration('rviz_with_headless'),
+            ),
         )),
-        arguments=['-d', rviz_config],
+        arguments=['-d', rviz_config, '-f', world],
         parameters=[{'use_sim_time': True}], # 
         output='screen'
     )
 
     return LaunchDescription([
         DeclareLaunchArgument(
+            'world', default_value='ocean_world',
+            choices=['ocean_world', 'viana_port', 'cadiz_bay'],
+            description='World to load from the simulator package.',
+        ),
+        DeclareLaunchArgument(
             'headless',
             default_value='false',
-            description='Run Gazebo server only and skip RViz.',
+            description='Run Gazebo without its GUI.',
         ),
         DeclareLaunchArgument(
             'start_gz_gui',
@@ -174,7 +215,11 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'start_rviz',
             default_value='true',
-            description='Open RViz when headless mode is disabled.',
+            description='Open RViz when permitted by the headless settings.',
+        ),
+        DeclareLaunchArgument(
+            'rviz_with_headless', default_value='false',
+            description='Keep RViz open when the Gazebo GUI is disabled with headless.',
         ),
         DeclareLaunchArgument(
             'rviz_config',
@@ -224,6 +269,7 @@ def generate_launch_description():
         spawn_uav,
         spawn_uuv,
         spawn_durius,
+        windturbine_visualization,
         spawn_nautilus,
         bridge,
 

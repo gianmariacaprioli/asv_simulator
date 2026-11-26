@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<robot name="durius">
+  <link name="base_link">
+    <visual>
+      <origin xyz="-0.623164 0.279401 -0.023381" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://asv_simulator/models/durius/meshes/DURIUS_simplified.stl" scale="1 1 1"/>
+      </geometry>
+      <material name="durius_material">
+        <color rgba="0.55 0.58 0.62 1"/>
+      </material>
+    </visual>
+  </link>
+</robot>

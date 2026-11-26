@@ -1,0 +1,204 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <world name="cadiz_bay">
+
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-navsat-system" name="gz::sim::systems::NavSat"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre</render_engine>
+    </plugin>
+
+    <gravity>0 0 -9.81</gravity>
+
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>36.509513</latitude_deg>
+      <longitude_deg>-6.263074</longitude_deg>
+      <elevation>0.0</elevation>
+      <heading_deg>0.0</heading_deg>
+    </spherical_coordinates>
+
+    <plugin filename="gz-sim-buoyancy-system" name="gz::sim::systems::Buoyancy">
+      <graded_buoyancy>
+        <default_density>1025</default_density>
+        <density_change>
+          <above_depth>0.0</above_depth>
+          <density>1.225</density>
+        </density_change>
+      </graded_buoyancy>
+      <enable>vessel_v2::base_link</enable>
+      <enable>uuv_bluerov2_heavy::base_link</enable>
+      <enable>durius::base_link</enable>
+      <enable>nautilus_vessel::base_link</enable>
+    </plugin>
+
+    <model name="water_plane">
+      <static>true</static>
+      <pose>0 0 0.0 0 0 0</pose>
+      <link name="link">
+        <visual name="water_visual">
+          <geometry>
+            <plane>
+              <normal>0 0 0</normal>
+              <size>2000 2000</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.0 0.3 0.6 0.4</ambient>
+            <diffuse>0.0 0.3 0.6 0.4</diffuse>
+            <specular>0.1 0.1 0.1 1.0</specular>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+    </model>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <!-- <model name="test">
+      <static>true</static>
+
+      <link name="link">
+
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 5 10</size>
+            </box>
+          </geometry>
+          <pose>9 0 0 0 0 0</pose>
+        </collision>
+
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 5 10</size>
+            </box>
+          </geometry>
+          <pose>9 0 0 0 0 0</pose>
+        </visual>
+
+      </link>
+    </model> -->
+
+    <!-- Waypoint 1 (X: 51.36m, Y: 31.85m) -->
+    <model name="waypoint_1">
+      <static>true</static>
+      <pose>51.36 31.85 4.0 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>2.0</radius> <!-- Raggio del cerchio/cilindro (4m di diametro) -->
+              <length>0.2</length> <!-- Spessore del cerchio -->
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>1.0 0.0 0.0 1.0</ambient>
+            <diffuse>1.0 0.0 0.0 1.0</diffuse>
+            <specular>0.2 0.2 0.2 1.0</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Waypoint 2 (X: 185.57m, Y: 109.52m) -->
+    <model name="waypoint_2">
+      <static>true</static>
+      <pose>185.57 109.52 4.0 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>2.0</radius> <!-- Raggio del cerchio/cilindro (4m di diametro) -->
+              <length>0.2</length> <!-- Spessore del cerchio -->
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>1.0 0.0 0.0 1.0</ambient>
+            <diffuse>1.0 0.0 0.0 1.0</diffuse>
+            <specular>0.2 0.2 0.2 1.0</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+<!-- Waypoint 3 (Posizionato a metà strada tra WP2 e il vecchio WP3) -->
+    <model name="waypoint_3">
+      <static>true</static>
+      <pose>242.81 -29.18 4.0 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>2.0</radius> <!-- Raggio 2m (diametro 4m) -->
+              <length>0.2</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>1.0 0.0 0.0 1.0</ambient> <!-- Rosso OPACO -->
+            <diffuse>1.0 0.0 0.0 1.0</diffuse>
+            <specular>0.2 0.2 0.2 1.0</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+
+
+    <model name="depths">
+      <static>true</static>
+      <pose>0 0 -20 0 0 0</pose>
+      <link name="link_depths">
+        <collision name="collision_depths">
+          <pose>0 0 -20 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://depths/meshes/depth.stl</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+
+        <visual name="visual_depths">
+          <pose>0 0 -20 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://depths/meshes/depth.stl</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.5 0.4 0.3 1.0</ambient>
+            <diffuse>0.5 0.4 0.3 1.0</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="harbour">
+      <static>true</static>
+      <include>
+        <name>harbour_model</name>
+        <uri>model://harbour</uri>
+        <pose>0 0 2.0 0 0 0</pose>
+      </include>
+    </model>
+
+    <!--
+      Dynamic vehicles are intentionally spawned by their dedicated launch
+      files. sim.launch.py enables the original vessel_v2, x500 and UUV by
+      default, preserving the simulator's previous startup behaviour.
+    -->
+
+  </world>
+</sdf>

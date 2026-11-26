@@ -94,6 +94,16 @@
         </geometry>
       </collision>
 
+      <!-- Support the X500 skids on the aft deck shown in the hull mesh. -->
+      <collision name="aft_deck_collision">
+        <pose>-1.02 0 0.015 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.50 0.46 0.03</size>
+          </box>
+        </geometry>
+      </collision>
+
       <visual name="hull_visual">
         <!-- Align the assembled CAD to the shaft axis and buoyancy-box keel.
              The exported hull already contains both visible motor assemblies. -->

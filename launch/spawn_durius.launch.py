@@ -5,6 +5,7 @@ import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, GroupAction, IncludeLaunchDescription
+from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
@@ -31,6 +32,7 @@ def generate_launch_description():
         package='ros_gz_sim',
         executable='create',
         name='spawn_durius',
+        condition=IfCondition(LaunchConfiguration('spawn_entity')),
         output='screen',
         arguments=[
             '-world', world,
@@ -58,6 +60,10 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
+        DeclareLaunchArgument(
+            'spawn_entity', default_value='true',
+            description='Set false when DURIUS is already included in the world.',
+        ),
         DeclareLaunchArgument(
             'world',
             default_value='ocean_world',

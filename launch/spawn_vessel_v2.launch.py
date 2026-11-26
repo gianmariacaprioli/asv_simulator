@@ -12,6 +12,7 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     package_share = get_package_share_directory('asv_simulator')
+    joint_state = ['/world/', LaunchConfiguration('world'), '/model/vessel_v2/joint_state']
     model_file = os.path.join(
         package_share,
         'models',
@@ -46,7 +47,7 @@ def generate_launch_description():
         arguments=[
             '/vessel_v2/command/motor_speed@actuator_msgs/msg/Actuators]gz.msgs.Actuators',
             '/model/vessel_v2/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry',
-            '/world/ocean_world/model/vessel_v2/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model',
+            [*joint_state, '@sensor_msgs/msg/JointState[gz.msgs.Model'],
             '/vessel_v2/camera@sensor_msgs/msg/Image[gz.msgs.Image',
             '/vessel_v2/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
             '/vessel_v2/lidar/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
@@ -54,7 +55,7 @@ def generate_launch_description():
             '/vessel_v2/gps/fix@sensor_msgs/msg/NavSatFix[gz.msgs.NavSat',
         ],
         remappings=[
-            ('/world/ocean_world/model/vessel_v2/joint_state', '/joint_states'),
+            (joint_state, '/joint_states'),
         ],
     )
 

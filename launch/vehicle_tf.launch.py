@@ -102,22 +102,23 @@ def vehicle_nodes(context):
         ),
     ]
 
-    if model != 'durius':
-        urdf_path = os.path.join(
-            get_package_share_directory('asv_simulator'), 'urdf', f'{model}.urdf',
-        )
-        with open(urdf_path) as urdf:
-            robot_description = urdf.read()
-        publishers.append(Node(
-            package='robot_state_publisher',
-            executable='robot_state_publisher',
-            namespace='' if model == 'vessel_v2' else model,
-            parameters=[{
-                'robot_description': robot_description,
-                'frame_prefix': 'nautilus_vessel/' if model == 'nautilus_vessel' else '',
-                'use_sim_time': True,
-            }],
-        ))
+    urdf_path = os.path.join(
+        get_package_share_directory('asv_simulator'), 'urdf', f'{model}.urdf',
+    )
+    with open(urdf_path) as urdf:
+        robot_description = urdf.read()
+    publishers.append(Node(
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        namespace='' if model == 'vessel_v2' else model,
+        parameters=[{
+            'robot_description': robot_description,
+            'frame_prefix': f'{model}/' if model in (
+                'durius', 'floating_windturbine', 'nautilus_vessel'
+            ) else '',
+            'use_sim_time': True,
+        }],
+    ))
 
     if model == 'vessel_v2':
         publishers.extend(vessel_sensor_nodes())

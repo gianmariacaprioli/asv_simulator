@@ -14,6 +14,10 @@ from launch_ros.actions import Node
 
 def spawn_nodes(context):
     package_share = get_package_share_directory('asv_simulator')
+    navsat_topic = [
+        '/world/', LaunchConfiguration('world'),
+        '/model/x500/link/base_link/sensor/navsat_sensor/navsat',
+    ]
     model_file = os.path.join(
         package_share,
         'models',
@@ -65,11 +69,11 @@ def spawn_nodes(context):
         arguments=[
             '/model/x500/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry',
             *command_bridges,
-            '/world/ocean_world/model/x500/link/base_link/sensor/navsat_sensor/navsat@sensor_msgs/msg/NavSatFix[gz.msgs.NavSat',
+            [*navsat_topic, '@sensor_msgs/msg/NavSatFix[gz.msgs.NavSat'],
         ],
         remappings=[
             (
-                '/world/ocean_world/model/x500/link/base_link/sensor/navsat_sensor/navsat',
+                navsat_topic,
                 '/x500/gps/fix',
             ),
         ],

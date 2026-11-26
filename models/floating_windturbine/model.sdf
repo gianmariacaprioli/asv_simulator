@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<sdf version="1.9">
+  <model name="floating_windturbine">
+    <link name="platform">
+      <!-- Ballasted platform, with mass set by displacement at half draft. -->
+      <inertial>
+        <pose>-17.32051 0 -4 0 0 0</pose>
+        <mass>718395.263</mass>
+        <inertia>
+          <ixx>210000000</ixx>
+          <iyy>210000000</iyy>
+          <izz>410000000</izz>
+        </inertia>
+      </inertial>
+      <velocity_decay>
+        <linear>0.1</linear>
+        <angular>0.1</angular>
+      </velocity_decay>
+      <collision name="tower_column">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>3</radius>
+            <length>14.5</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <collision name="tower_foot">
+        <pose>0 0 -7.25 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>4.75</radius>
+            <length>0.5</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <collision name="tower_cap">
+        <pose>0 0 7.625 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>3.2</radius>
+            <length>0.25</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <collision name="port_column">
+        <pose>-25.98076 15 0.25 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>3</radius>
+            <length>14.5</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <collision name="port_foot">
+        <pose>-25.98076 15 -7.25 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>4.75</radius>
+            <length>0.5</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <collision name="port_cap">
+        <pose>-25.98076 15 7.625 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>3.2</radius>
+            <length>0.25</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <collision name="starboard_column">
+        <pose>-25.98076 -15 0.25 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>3</radius>
+            <length>14.5</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <collision name="starboard_foot">
+        <pose>-25.98076 -15 -7.25 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>4.75</radius>
+            <length>0.5</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <collision name="starboard_cap">
+        <pose>-25.98076 -15 7.625 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>3.2</radius>
+            <length>0.25</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="windturbine_visual">
+        <!-- Scaled mesh floater midpoint at local z=-2.5 m. -->
+        <pose>0 0 2.5 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://floating_windturbine/meshes/floating_windturbine.stl</uri>
+            <scale>0.5 0.5 0.5</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.08 0.35 0.10 1</ambient>
+          <diffuse>0.12 0.68 0.18 1</diffuse>
+          <specular>0.10 0.15 0.10 1</specular>
+        </material>
+      </visual>
+    </link>
+    <plugin filename="gz-sim-odometry-publisher-system"
+            name="gz::sim::systems::OdometryPublisher">
+      <odom_frame>floating_windturbine/odom</odom_frame>
+      <robot_base_frame>floating_windturbine/platform</robot_base_frame>
+      <odom_publish_frequency>20</odom_publish_frequency>
+      <dimensions>3</dimensions>
+    </plugin>
+  </model>
+</sdf>
